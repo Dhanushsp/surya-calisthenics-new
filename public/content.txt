@@ -1,0 +1,114 @@
+[HERO]
+headline = Reclaim Your True Strength
+subheadline = Master your bodyweight, build high-performance muscle, and achieve elite calisthenics skills with tailored mobile-first coaching.
+background_gif = https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVqamNsbGF0OHFhcWlzMTBmaDVodTN2Zms3a2l3Mmt4ZGR3ZjhsMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKrEzvLbsVAud8I/giphy.gif
+cta_text = Start Your Transformation
+
+[FLOATING_CTA]
+button_text = Join Program Now
+
+[TRANSFORMATIONS]
+trans_1_img = https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop
+trans_1_name = Marcus T. - 12 Weeks
+
+trans_1_duration = 13 Weeks
+trans_1_program = STRENGTH PROTOCOL
+trans_1_desc = Went from 0 to 12 clean pull-ups, dropping 8% body fat.
+
+trans_2_img = https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop
+trans_2_name = Sarah K. - 16 Weeks
+trans_2_stage = AFTER
+trans_2_duration = 16 Weeks
+trans_2_program = SKILL ACQUISITION
+trans_2_desc = Achieved a solid 15-second freestanding handstand and elite core power.
+
+trans_3_img = https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=600&auto=format&fit=crop
+trans_3_name = Alex R. - 24 Weeks
+trans_3_stage = AFTER
+trans_3_duration = 24 Weeks
+trans_3_program = RING MASTERY
+trans_3_desc = Mastered the full muscle-up and unlocked advanced gymnastic ring flows.
+
+trans_4_img = https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=600&auto=format&fit=crop
+trans_4_name = David L. - 8 Weeks
+trans_4_stage = AFTER
+trans_4_duration = 8 Weeks
+trans_4_program = MOBILITY CORE
+trans_4_desc = Rebuilt posture, cured shoulder pain, and unlocked elite body control.
+
+[ABOUT]
+coach_name = Coach Alex Rivers
+coach_title = Elite Calisthenics Specialist & Founder
+coach_photo = https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=800&auto=format&fit=crop
+certification_photo = https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=800&auto=format&fit=crop
+bio_heading = Meet Your Coach
+bio_paragraph_1 = Hey, I'm Alex. I spent over a decade perfecting bodyweight training to unlock movements most think are reserved for elite gymnasts. My mission is to demystify advanced calisthenics, turning complex skills into scientific, progressive training steps anyone can follow.
+bio_paragraph_2 = Having coached over 500+ athletes worldwide through mobile-optimized virtual programs, I focus on building raw, functional strength, bulletproofing joints, and developing a shredded, high-performance physique without the need for heavy weights.
+
+[VIDEO]
+youtube_id = 78zo1AeWSc8
+video_title = Calisthenics Masterclass & Progression Secrets
+
+[REVIEWS]
+review_1 = "This program is incredible! I went from struggling with basic pushups to mastering the handstand pushup. The mobile layout makes it so easy to follow in the park." - Marcus T.
+review_2 = "Alex's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control." - Sarah K.
+review_3 = "Absolutely mind-blowing results. I've gained 5kg of solid muscle and feel stronger and lighter than ever. The support is elite." - Alex R.
+review_4 = "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Alex right there on the bars with me." - Liam P.
+review_5 = "Most fitness programs are boring. Calisthenics builds skill, coordination, and a highly aesthetic physique. Best coaching out there." - Elena G.
+
+[PROGRAM]
+section_title = The Bodyweight Athlete Protocol
+section_subtitle = A comprehensive, mobile-first training environment engineered for rapid skill acquisition and raw strength.
+supporting_image = https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop
+
+point_1_icon = Target
+point_1_title = Skill-Based Progressions
+point_1_text = Master high-level skills like the Handstand, Muscle-Up, and Planche with personalized, joint-safe progressive stages.
+
+point_2_icon = Flame
+point_2_title = Hypertrophy & Fat Loss
+point_2_text = Build a dense, functional, and highly defined athletic physique using targeted bodyweight resistance protocols.
+
+point_3_icon = Shield
+point_3_title = Joint Bulletproofing
+point_3_text = Strengthen your wrists, elbows, and shoulders with expert mobility and active flexibility routines to prevent injury.
+
+point_4_icon = Zap
+point_4_title = Mobile Training Hub
+point_4_text = Access your daily workouts, HD demonstration videos, and submit direct video form checks, optimized for the outdoor park.
+
+[FOOTER]
+instagram_url = https://instagram.com/calisthenicscoach
+contact_email = contact@bodyweightathlete.com
+contact_phone = +1 (555) 019-3829
+copyright = © 2026 Calisthenics Coach. All rights reserved.
+secondary_cta_text = Follow on Instagram
+
+[VIDEO_TESTIMONIALS]
+section_eyebrow = Proofs & Progress
+section_title = Athletes on the Bars
+section_subtitle = Drag or swipe the video horizontally to slide through progress clips.
+; Remove every client_* entry below to hide the section entirely.
+client_1_name = Marcus T.
+client_1_skill = Front Lever & Muscle-Up Mastery
+client_1_duration = 12 Weeks Protocol
+client_1_desc = Demonstrating solid 10-second front levers and explosive bar muscle-ups with perfect mechanics.
+client_1_videos = 78zo1AeWSc8, tpEe10R1f0Y, p9gYwJ8I9uY
+
+client_2_name = Sarah K.
+client_2_skill = Freestanding Handstand Balance
+client_2_duration = 16 Weeks Protocol
+client_2_desc = Showcasing pristine shoulder stability and body alignment during an active freestanding hold.
+client_2_videos = p9gYwJ8I9uY, EGMG_7m_xH4
+
+client_3_name = Alex R.
+client_3_skill = Gymnastic Ring False-Grip Flow
+client_3_duration = 24 Weeks Protocol
+client_3_desc = Seamless flow through ring muscle-ups, clean static support holds, and stable shoulder stands.
+client_3_videos = EGMG_7m_xH4, j71XgK-9Kco
+
+client_4_name = David L.
+client_4_skill = Overhead Mobility Restoration
+client_4_duration = 8 Weeks Protocol
+client_4_desc = Showing pain-free overhead extensions and fluid press movements after resolving severe impingement.
+client_4_videos = j71XgK-9Kco, 78zo1AeWSc8
