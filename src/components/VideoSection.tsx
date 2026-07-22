@@ -23,7 +23,9 @@ export default function VideoSection({ content }: VideoSectionProps) {
   // Whether the video player is actually visible in the viewport right now.
   const [isInView, setIsInView] = useState(false);
 
-  // Construct a secure, autoplaying, looping, chromeless YouTube embed URL.
+  // Construct a secure, looping, chromeless YouTube embed URL.
+  // autoplay=0         -> playback is driven manually via the IFrame API once the
+  //                       section scrolls into view, not as soon as the iframe loads
   // controls=0        -> no play/pause/progress bar
   // disablekb=1       -> no keyboard interaction (space to pause, arrows to seek, etc.)
   // fs=0               -> no fullscreen button
@@ -32,13 +34,13 @@ export default function VideoSection({ content }: VideoSectionProps) {
   // rel=0 + loop=1 + playlist=<same id> -> loops the same video instead of
   //                     showing the end-screen "related videos" grid
   // showinfo=0         -> (legacy) no title/uploader info
-  // enablejsapi=1       -> required so we can postMessage mute/unmute commands
+  // enablejsapi=1       -> required so we can postMessage play/pause/mute commands
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
-  const embedUrl = `https://www.youtube.com/embed/${content.youtube_id}?autoplay=1&mute=1&loop=1&playlist=${content.youtube_id}&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&showinfo=0&enablejsapi=1&origin=${origin}`;
+  const embedUrl = `https://www.youtube.com/embed/${content.youtube_id}?autoplay=0&mute=1&loop=1&playlist=${content.youtube_id}&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&showinfo=0&enablejsapi=1&origin=${origin}`;
 
   // Send a command to the embedded YouTube player via postMessage,
   // following the YouTube IFrame API protocol.
-  const postCommand = useCallback((func: 'mute' | 'unMute') => {
+  const postCommand = useCallback((func: 'mute' | 'unMute' | 'playVideo' | 'pauseVideo') => {
     iframeRef.current?.contentWindow?.postMessage(
       JSON.stringify({ event: 'command', func, args: [] }),
       'https://www.youtube.com'
@@ -52,6 +54,12 @@ export default function VideoSection({ content }: VideoSectionProps) {
   useEffect(() => {
     postCommand(isAudible ? 'unMute' : 'mute');
   }, [isAudible, postCommand]);
+
+  // Play only while the section is actually visible; pause the instant it
+  // scrolls out of view, and resume automatically when the user scrolls back.
+  useEffect(() => {
+    postCommand(isInView ? 'playVideo' : 'pauseVideo');
+  }, [isInView, postCommand]);
 
   // Watch for the video entering/leaving the viewport.
   useEffect(() => {

@@ -21,8 +21,8 @@ import {
 // Robust high-quality defaults matching the content.txt
 export const DEFAULT_CONTENT: WebsiteContent = {
   hero: {
-    headline: "Reclaim Your True Strength",
-    subheadline: "Master your bodyweight, build high-performance muscle, and achieve elite calisthenics skills with tailored mobile-first coaching.",
+    headline: "Command Total Body Control",
+    subheadline: "Build raw strength, a shredded physique, and explosive bodyweight skill — mastered rep by rep with elite calisthenics coaching.",
     background_gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVqamNsbGF0OHFhcWlzMTBmaDVodTN2Zms3a2l3Mmt4ZGR3ZjhsMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKrEzvLbsVAud8I/giphy.gif",
     cta_text: "Start Your Transformation",
   },
