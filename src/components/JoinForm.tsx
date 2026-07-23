@@ -44,8 +44,8 @@ export default function JoinForm({ onSuccessClose, isModal = false }: JoinFormPr
           goal: formState.goal,
           experience: formState.experience,
           pullups: formState.pullups,
-          subject: `Rivers Calisthenics: New Onboarding Profile from ${formState.name}`,
-          from_name: "Rivers Calisthenics Protocol Portal",
+          subject: `Surya Calisthenics: New Onboarding Profile from ${formState.name}`,
+          from_name: "Surya Calisthenics Protocol Portal",
           message: `New Athlete Application Profile Details:
 ------------------------------------------
 • Name: ${formState.name}
@@ -147,7 +147,7 @@ The user is being redirected to complete their Google Onboarding form.`
                   <Instagram className="absolute right-4 top-3.5 h-4 w-4 text-brand-muted" />
                 </div>
                 <p className="text-[10px] text-brand-muted mt-1 uppercase tracking-wider font-mono">
-                  Coach Alex reviews your physique structure directly via Instagram.
+                  Coach Surya reviews your physique structure directly via Instagram.
                 </p>
               </div>
 
@@ -259,7 +259,7 @@ The user is being redirected to complete their Google Onboarding form.`
               Application Transmitted
             </h3>
             <p className="text-brand-muted max-w-sm mx-auto text-sm leading-relaxed mb-6 font-light">
-              Thank you, <span className="text-brand-text font-bold">{formState.name}</span>. Coach Alex has received your calisthenics profile for <span className="text-brand-text font-bold">@{formState.instagram}</span>.
+              Thank you, <span className="text-brand-text font-bold">{formState.name}</span>. Coach Surya has received your calisthenics profile for <span className="text-brand-text font-bold">@{formState.instagram}</span>.
             </p>
 
             {/* Google Forms Onboarding Redirect Box */}
@@ -295,7 +295,7 @@ The user is being redirected to complete their Google Onboarding form.`
                 {formState.goal === 'mobility' && '🛡️ Shoulder & Scapula Bulletproofing'}
               </p>
               <p className="text-xs text-brand-muted leading-relaxed font-light">
-                Check your Instagram direct messages. Coach Alex will contact you within 2-4 hours to review your current training video clips and activate your dashboard.
+                Check your Instagram direct messages. Coach Surya will contact you within 2-4 hours to review your current training video clips and activate your dashboard.
               </p>
             </div>
 

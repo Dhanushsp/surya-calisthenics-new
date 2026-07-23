@@ -69,7 +69,7 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
                   ⚡ All-Inclusive Mobile Access
                 </h4>
                 <p className="text-xs text-brand-muted leading-relaxed font-light">
-                  Includes full HD video exercise catalogs, active form-check queues, customized progress trackers, and real-time messaging directly with Coach Alex.
+                  Includes full HD video exercise catalogs, active form-check queues, customized progress trackers, and real-time messaging directly with Coach Surya.
                 </p>
               </div>
             </div>

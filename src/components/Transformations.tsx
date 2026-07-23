@@ -67,21 +67,31 @@ export default function Transformations({ items }: TransformationsProps) {
     };
   }, [items.length]);
 
-  // Core animation loop: eases currentX toward targetX every frame, and
-  // silently wraps the position by one set-width whenever it crosses a
-  // boundary — this is the "infinite loop" mechanism.
+  // Core animation loop. When the user is dragging, the track follows the
+  // pointer 1:1. When released, it eases back to rest and then drifts on
+  // its own in a continuous marquee-style auto-scroll (same visual idea as
+  // the Reviews marquee, just driven by rAF instead of a CSS keyframe so it
+  // can be interrupted/resumed by dragging at any time). Wrapping keeps the
+  // track seamlessly looping regardless of item count.
+  const AUTO_SCROLL_SPEED = 0.6; // px per frame
+
   useEffect(() => {
     if (items.length === 0) return;
 
     const tick = () => {
       const w = setWidthRef.current;
       if (w > 0) {
-        const diff = targetXRef.current - currentXRef.current;
-
         if (isDraggingRef.current) {
           currentXRef.current = targetXRef.current;
-        } else if (Math.abs(diff) > 0.05) {
-          currentXRef.current += diff * 0.12; // easing factor — tweak for feel
+        } else {
+          const diff = targetXRef.current - currentXRef.current;
+          if (Math.abs(diff) > 0.05) {
+            currentXRef.current += diff * 0.12; // ease back after a drag release
+          } else {
+            // Continuous auto-scroll, always moving right-to-left.
+            currentXRef.current -= AUTO_SCROLL_SPEED;
+            targetXRef.current = currentXRef.current;
+          }
         }
 
         // Seamless wrap: keep currentX (and target/drag anchors) within
@@ -106,34 +116,6 @@ export default function Transformations({ items }: TransformationsProps) {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [items.length]);
-
-  // Vertical page-scroll → horizontal target sync (replaces direct
-  // scrollLeft writes with a target the rAF loop eases toward).
-  useEffect(() => {
-    if (items.length === 0) return;
-
-    const handleScroll = () => {
-      if (isDraggingRef.current || !sectionRef.current) return;
-      const w = setWidthRef.current;
-      if (!w) return;
-
-      const rect = sectionRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-
-      if (rect.top < viewportHeight && rect.bottom > 0) {
-        const totalDistance = viewportHeight + rect.height;
-        const currentDistance = viewportHeight - rect.top;
-        const progress = Math.max(0, Math.min(1, currentDistance / totalDistance));
-        // Slide through the middle copy as the page scrolls; the rAF
-        // loop above handles wrapping if this ever pushes past a boundary.
-        targetXRef.current = -w - progress * w;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
   }, [items.length]);
 
   // Unified pointer handlers (covers mouse + touch + pen in one path).
@@ -177,14 +159,14 @@ export default function Transformations({ items }: TransformationsProps) {
               Before & After Gallery
             </h2>
             <p className="text-brand-muted text-xs md:text-sm max-w-lg mt-2 font-light">
-              Scroll down the page to watch our athletes evolve, or drag/swipe horizontally on any device to browse manually.
+              Watch our athletes evolve on autoplay, or drag/swipe horizontally on any device to browse manually.
             </p>
           </div>
 
           <div className="hidden lg:flex items-center gap-4 font-mono text-[9px] text-brand-primary bg-brand-primary/5 border border-brand-primary/20 px-4 py-2 rounded-none uppercase tracking-widest font-bold">
             <span className="flex items-center gap-1"><TrendingUp className="h-3 w-3 text-brand-primary" /> Performance-Linked</span>
             <span className="h-3 w-px bg-brand-border" />
-            <span className="flex items-center gap-1.5"><ArrowLeftRight className="h-3 w-3 text-brand-primary animate-pulse" /> Scroll to Move</span>
+            <span className="flex items-center gap-1.5"><ArrowLeftRight className="h-3 w-3 text-brand-primary animate-pulse" /> Drag to Browse</span>
           </div>
         </div>
       </div>
@@ -277,7 +259,7 @@ export default function Transformations({ items }: TransformationsProps) {
       {/* Subtle touch indicator */}
       <div className="flex justify-center items-center gap-1.5 mt-2.5 text-[9px] font-mono text-brand-muted uppercase tracking-widest opacity-60">
         <ArrowLeftRight className="h-2.5 w-2.5 animate-pulse" />
-        <span>Swipe or scroll page vertically</span>
+        <span>Drag to browse</span>
       </div>
     </section>
   );

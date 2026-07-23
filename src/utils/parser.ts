@@ -52,12 +52,12 @@ export const DEFAULT_CONTENT: WebsiteContent = {
     }
   ],
   about: {
-    coach_name: "Coach Alex Rivers",
+    coach_name: "Coach Surya",
     coach_title: "Elite Calisthenics Specialist & Founder",
     coach_photo: "https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=800&auto=format&fit=crop",
     certification_photo: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=800&auto=format&fit=crop",
     bio_heading: "Meet Your Coach",
-    bio_paragraph_1: "Hey, I'm Alex. I spent over a decade perfecting bodyweight training to unlock movements most think are reserved for elite gymnasts. My mission is to demystify advanced calisthenics, turning complex skills into scientific, progressive training steps anyone can follow.",
+    bio_paragraph_1: "Hey, I'm Surya. I spent over a decade perfecting bodyweight training to unlock movements most think are reserved for elite gymnasts. My mission is to demystify advanced calisthenics, turning complex skills into scientific, progressive training steps anyone can follow.",
     bio_paragraph_2: "Having coached over 500+ athletes worldwide through mobile-optimized virtual programs, I focus on building raw, functional strength, bulletproofing joints, and developing a shredded, high-performance physique without the need for heavy weights."
   },
   video: {
@@ -70,7 +70,7 @@ export const DEFAULT_CONTENT: WebsiteContent = {
       author: "Marcus T."
     },
     {
-      text: "Alex's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control.",
+      text: "Surya's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control.",
       author: "Sarah K."
     },
     {
@@ -78,7 +78,7 @@ export const DEFAULT_CONTENT: WebsiteContent = {
       author: "Alex R."
     },
     {
-      text: "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Alex right there on the bars with me.",
+      text: "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Surya right there on the bars with me.",
       author: "Liam P."
     },
     {
@@ -115,10 +115,12 @@ export const DEFAULT_CONTENT: WebsiteContent = {
   },
   footer: {
     instagram_url: "https://instagram.com/calisthenicscoach",
+    youtube_url: "https://www.youtube.com",
     contact_email: "contact@bodyweightathlete.com",
     contact_phone: "+1 (555) 019-3829",
-    copyright: "© 2026 Calisthenics Coach. All rights reserved.",
-    secondary_cta_text: "Follow on Instagram"
+    copyright: "© 2026 Surya Calisthenics. All rights reserved.",
+    secondary_cta_text: "Follow on Instagram",
+    youtube_cta_text: "Subscribe on YouTube"
   },
   videoTestimonials: {
     section_eyebrow: "Proofs & Progress",
@@ -310,10 +312,12 @@ export function parseContentTxt(text: string): WebsiteContent {
 
   const footer: FooterContent = {
     instagram_url: result.FOOTER?.instagram_url || DEFAULT_CONTENT.footer.instagram_url,
+    youtube_url: result.FOOTER?.youtube_url || DEFAULT_CONTENT.footer.youtube_url,
     contact_email: result.FOOTER?.contact_email || DEFAULT_CONTENT.footer.contact_email,
     contact_phone: result.FOOTER?.contact_phone || DEFAULT_CONTENT.footer.contact_phone,
     copyright: result.FOOTER?.copyright || DEFAULT_CONTENT.footer.copyright,
     secondary_cta_text: result.FOOTER?.secondary_cta_text || DEFAULT_CONTENT.footer.secondary_cta_text,
+    youtube_cta_text: result.FOOTER?.youtube_cta_text || DEFAULT_CONTENT.footer.youtube_cta_text,
   };
 
   // Build video testimonials dynamically

@@ -95,7 +95,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
             Unlocking Bodyweight Power
           </h2>
           <p className="text-brand-muted text-sm md:text-base max-w-xl mx-auto mt-4 font-sans font-light">
-            {content.video_title} — Watch Coach Alex break down the exact biomechanics of the handstand and muscle-up.
+            {content.video_title} — Watch Coach Surya break down the exact biomechanics of the handstand and muscle-up.
           </p>
         </div>
 

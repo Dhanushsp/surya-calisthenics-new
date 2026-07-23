@@ -76,26 +76,26 @@ export default function App() {
       {/* 2. Persistent Floating CTA */}
       <FloatingCta content={content.floating_cta} onClick={triggerSignupPortal} />
 
-      {/* 3. Client Transformations Gallery */}
-      <Transformations items={content.transformations} />
-
-      {/* Video Testimonials Carousel */}
-      <VideoTestimonials content={content.videoTestimonials} />
-
-      {/* 4. About the Coach */}
-      <About content={content.about} />
-
-      {/* 5. Video Section */}
+      {/* 3. Video Section */}
       <VideoSection content={content.video} />
 
-      {/* 6. Reviews / Testimonials (Infinite Marquee) */}
+      {/* 4. Client Transformations Gallery */}
+      <Transformations items={content.transformations} />
+
+      {/* 5. Video Testimonials Carousel */}
+      <VideoTestimonials content={content.videoTestimonials} />
+
+      {/* 6. About the Coach */}
+      <About content={content.about} />
+
+      {/* 7. Reviews / Testimonials (Infinite Marquee) */}
       <Reviews items={content.reviews} />
 
-      {/* 7. Program Details */}
+      {/* 8. Program Details */}
       <ProgramDetails content={content.program} onCtaClick={triggerSignupPortal} />
 
       {/* Dedicated On-Page Signup Segment (for structural completeness and anchor targets) */}
-      <section className="py-24 bg-brand-bg border-t border-brand-border px-6 relative" id="enrollment-portal">
+      {/* <section className="py-24 bg-brand-bg border-t border-brand-border px-6 relative" id="enrollment-portal">
         <div className="max-w-7xl mx-auto relative z-10 text-center mb-12">
           <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-brand-muted uppercase block mb-3">
             SECURE YOUR SPOT
@@ -104,14 +104,14 @@ export default function App() {
             Apply For Personal Coaching
           </h2>
           <p className="text-brand-muted text-sm max-w-lg mx-auto mt-4 font-light">
-            Submit your profile. Coach Alex personally reviews every submission via Instagram to maintain high program standards.
+            Submit your profile. Coach Surya personally reviews every submission via Instagram to maintain high program standards.
           </p>
         </div>
 
         <div className="max-w-xl mx-auto relative z-10">
           <JoinForm />
         </div>
-      </section>
+      </section> */}
 
       {/* 8. Footer */}
       <Footer content={content.footer} onJoinCtaClick={triggerSignupPortal} />

@@ -58,10 +58,12 @@ export interface ProgramContent {
 
 export interface FooterContent {
   instagram_url: string;
+  youtube_url: string;
   contact_email: string;
   contact_phone: string;
   copyright: string;
   secondary_cta_text: string;
+  youtube_cta_text: string;
 }
 
 export interface VideoTestimonialItem {

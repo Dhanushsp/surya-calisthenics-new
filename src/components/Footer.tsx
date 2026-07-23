@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { FooterContent } from '../types';
-import { Instagram, Mail, Phone, ArrowUp, ChevronRight, Activity } from 'lucide-react';
+import { Instagram, Mail, Phone, ArrowUp, ChevronRight, Activity, Youtube } from 'lucide-react';
 
 interface FooterProps {
   content: FooterContent;
@@ -29,7 +29,7 @@ export default function Footer({ content, onJoinCtaClick }: FooterProps) {
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2 text-brand-text">
               <Activity className="h-4 w-4 text-brand-primary animate-pulse" />
-              <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase">RIVERS CALISTHENICS</span>
+              <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase">SURYA CALISTHENICS</span>
             </div>
             <p className="text-brand-muted text-xs md:text-sm max-w-sm leading-relaxed font-light">
               Scientific calisthenics progressions designed to unlock elite bodyweight control, shredded muscle development, and joint longevity on the bars.
@@ -70,7 +70,7 @@ export default function Footer({ content, onJoinCtaClick }: FooterProps) {
               COACHING DISPATCH
             </h4>
             
-            <div className="space-y-2.5 font-mono">
+            {/* <div className="space-y-2.5 font-mono">
               <a
                 href={`mailto:${content.contact_email}`}
                 className="flex items-center gap-2 hover:text-brand-primary transition-colors text-brand-muted"
@@ -85,10 +85,10 @@ export default function Footer({ content, onJoinCtaClick }: FooterProps) {
                 <Phone className="h-4 w-4 text-brand-primary/60" />
                 <span>{content.contact_phone}</span>
               </a>
-            </div>
+            </div> */}
 
-            {/* Secondary CTA Button (Follow on Instagram) */}
-            <div className="pt-2">
+            {/* Social CTAs */}
+            <div className="pt-2 flex flex-col items-start gap-2.5">
               <a
                 href={content.instagram_url}
                 target="_blank"
@@ -97,6 +97,15 @@ export default function Footer({ content, onJoinCtaClick }: FooterProps) {
               >
                 <Instagram className="h-3.5 w-3.5 text-brand-primary" />
                 <span>{content.secondary_cta_text}</span>
+              </a>
+              <a
+                href={content.youtube_url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 bg-brand-primary/5 border border-brand-primary/20 hover:bg-brand-primary/10 text-brand-text rounded-none py-3 px-5 text-xs font-mono tracking-widest uppercase font-bold transition-all"
+              >
+                <Youtube className="h-3.5 w-3.5 text-brand-primary" />
+                <span>{content.youtube_cta_text}</span>
               </a>
             </div>
 

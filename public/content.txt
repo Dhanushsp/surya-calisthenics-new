@@ -37,12 +37,12 @@ trans_4_program = MOBILITY CORE
 trans_4_desc = Rebuilt posture, cured shoulder pain, and unlocked elite body control.
 
 [ABOUT]
-coach_name = Coach Alex Rivers
+coach_name = Coach Surya
 coach_title = Elite Calisthenics Specialist & Founder
-coach_photo = https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=800&auto=format&fit=crop
+coach_photo = ../src/images/coach.png
 certification_photo = https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=800&auto=format&fit=crop
 bio_heading = Meet Your Coach
-bio_paragraph_1 = Hey, I'm Alex. I spent over a decade perfecting bodyweight training to unlock movements most think are reserved for elite gymnasts. My mission is to demystify advanced calisthenics, turning complex skills into scientific, progressive training steps anyone can follow.
+bio_paragraph_1 = Hey, I'm Surya. I spent over a decade perfecting bodyweight training to unlock movements most think are reserved for elite gymnasts. My mission is to demystify advanced calisthenics, turning complex skills into scientific, progressive training steps anyone can follow.
 bio_paragraph_2 = Having coached over 500+ athletes worldwide through mobile-optimized virtual programs, I focus on building raw, functional strength, bulletproofing joints, and developing a shredded, high-performance physique without the need for heavy weights.
 
 [VIDEO]
@@ -51,9 +51,9 @@ video_title = Calisthenics Masterclass & Progression Secrets
 
 [REVIEWS]
 review_1 = "This program is incredible! I went from struggling with basic pushups to mastering the handstand pushup. The mobile layout makes it so easy to follow in the park." - Marcus T.
-review_2 = "Alex's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control." - Sarah K.
+review_2 = "Surya's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control." - Sarah K.
 review_3 = "Absolutely mind-blowing results. I've gained 5kg of solid muscle and feel stronger and lighter than ever. The support is elite." - Alex R.
-review_4 = "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Alex right there on the bars with me." - Liam P.
+review_4 = "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Surya right there on the bars with me." - Liam P.
 review_5 = "Most fitness programs are boring. Calisthenics builds skill, coordination, and a highly aesthetic physique. Best coaching out there." - Elena G.
 
 [PROGRAM]
@@ -79,10 +79,12 @@ point_4_text = Access your daily workouts, HD demonstration videos, and submit d
 
 [FOOTER]
 instagram_url = https://instagram.com/calisthenicscoach
+youtube_url = https://www.youtube.com
 contact_email = contact@bodyweightathlete.com
 contact_phone = +1 (555) 019-3829
-copyright = © 2026 Calisthenics Coach. All rights reserved.
+copyright = © 2026 Surya Calisthenics. All rights reserved.
 secondary_cta_text = Follow on Instagram
+youtube_cta_text = Subscribe on YouTube
 
 [VIDEO_TESTIMONIALS]
 section_eyebrow = Proofs & Progress
