@@ -7,6 +7,8 @@ export interface HeroContent {
   headline: string;
   subheadline: string;
   background_gif: string;
+  desktop_image: string;
+  mobile_image: string;
   cta_text: string;
 }
 

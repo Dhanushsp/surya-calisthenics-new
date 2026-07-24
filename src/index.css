@@ -3,7 +3,7 @@
 
 :root {
   /* Dynamic brand theme colors - Red & White scheme */
-  --brand-primary: #E11D48;      /* Active athletic red (rose-600) */
+  --brand-primary: #FF0000;      /* Active athletic red (rose-600) */
   --brand-secondary: #BE123C;    /* Deeper dark red (rose-700) */
   --brand-bg: #FFFFFF;           /* Pristine main background */
   --brand-card: #FAFAFA;         /* Premium light card background */
@@ -51,6 +51,16 @@ body {
   color: var(--brand-text);
 }
 
+@media (min-width: 1490px) {
+  .hero-wide-headline {
+    font-size: 6rem;
+  }
+
+  .hero-wide-copy {
+    font-size: 1.5rem;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -67,3 +77,16 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--brand-primary);
 }
+
+/* Default theme colors */
+
+  /* Dynamic brand theme colors - Red & White scheme */
+  /* --brand-primary: #E11D48;      /* Active athletic red (rose-600) */
+  /* --brand-secondary: #BE123C;    /* Deeper dark red (rose-700) */
+  /* --brand-bg: #FFFFFF;           /* Pristine main background */
+  /* --brand-card: #FAFAFA;         /* Premium light card background */
+  /* --brand-text: #0F172A;         /* Slate-900 heading and body text */
+  /* --brand-muted: #475569;        /* Slate-600 descriptions and captions */
+  /* --brand-border: #E2E8F0;       /* Slate-200 clean border divider */
+  /* --brand-selection-bg: #E11D48;
+  /* --brand-selection-text: #FFFFFF; */ */ */ */ */ */ */ */ */

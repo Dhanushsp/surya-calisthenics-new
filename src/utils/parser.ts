@@ -24,6 +24,8 @@ export const DEFAULT_CONTENT: WebsiteContent = {
     headline: "Command Total Body Control",
     subheadline: "Build raw strength, a shredded physique, and explosive bodyweight skill — mastered rep by rep with elite calisthenics coaching.",
     background_gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVqamNsbGF0OHFhcWlzMTBmaDVodTN2Zms3a2l3Mmt4ZGR3ZjhsMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKrEzvLbsVAud8I/giphy.gif",
+    desktop_image: "/images/desktop-hero.png",
+    mobile_image: "/images/mobile-hero.png",
     cta_text: "Start Your Transformation",
   },
   floating_cta: {
@@ -54,8 +56,8 @@ export const DEFAULT_CONTENT: WebsiteContent = {
   about: {
     coach_name: "Coach Surya",
     coach_title: "Elite Calisthenics Specialist & Founder",
-    coach_photo: "https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=800&auto=format&fit=crop",
-    certification_photo: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=800&auto=format&fit=crop",
+    coach_photo: "/images/coach.jpeg",
+    certification_photo: "/images/certificate.jpeg",
     bio_heading: "Meet Your Coach",
     bio_paragraph_1: "Hey, I'm Surya. I spent over a decade perfecting bodyweight training to unlock movements most think are reserved for elite gymnasts. My mission is to demystify advanced calisthenics, turning complex skills into scientific, progressive training steps anyone can follow.",
     bio_paragraph_2: "Having coached over 500+ athletes worldwide through mobile-optimized virtual programs, I focus on building raw, functional strength, bulletproofing joints, and developing a shredded, high-performance physique without the need for heavy weights."
@@ -202,6 +204,8 @@ export function parseContentTxt(text: string): WebsiteContent {
     headline: result.HERO?.headline || DEFAULT_CONTENT.hero.headline,
     subheadline: result.HERO?.subheadline || DEFAULT_CONTENT.hero.subheadline,
     background_gif: result.HERO?.background_gif || DEFAULT_CONTENT.hero.background_gif,
+    desktop_image: result.HERO?.desktop_image || DEFAULT_CONTENT.hero.desktop_image,
+    mobile_image: result.HERO?.mobile_image || DEFAULT_CONTENT.hero.mobile_image,
     cta_text: result.HERO?.cta_text || DEFAULT_CONTENT.hero.cta_text,
   };
 

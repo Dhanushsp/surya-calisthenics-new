@@ -7,7 +7,6 @@ import React from 'react';
 import { AboutContent } from '../types';
 import { Award, Shield, Check, Star } from 'lucide-react';
 import { motion } from 'motion/react';
-import certificateImg from '../images/certificate.jpeg';
 
 interface AboutProps {
   content: AboutContent;
@@ -66,7 +65,7 @@ export default function About({ content }: AboutProps) {
             <div className="relative w-[46%] shrink-0">
               <div className="relative aspect-[3/4] rounded-none overflow-hidden border border-brand-border shadow-2xl">
                 <img
-                  src={certificateImg}
+                  src={content.certification_photo}
                   alt={`${content.coach_name} certification`}
                   referrerPolicy="no-referrer"
                   loading="lazy"

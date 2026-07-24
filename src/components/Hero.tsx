@@ -7,8 +7,6 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { HeroContent } from '../types';
 import { ArrowDown } from 'lucide-react';
-import desktopHero from '../images/desktop-hero.png';
-import mobileHero from '../images/mobile-hero.png';
 
 interface HeroProps {
   content: HeroContent;
@@ -17,35 +15,35 @@ interface HeroProps {
 
 export default function Hero({ content, onCtaClick }: HeroProps) {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-brand-bg flex flex-col md:flex-row md:items-center">
+    <section className="relative min-h-[100svh] w-full overflow-hidden bg-brand-bg flex flex-col md:flex-row md:items-center">
       {/* Mobile Hero Image - shown in full at the top, large and no crop / no fade so the athlete stays fully visible */}
-      <div className="md:hidden w-full pt-4 px-4">
+      <div className="md:hidden w-full px-4 pt-4">
         <img
-          src={mobileHero}
+          src={content.mobile_image}
           alt="Athlete performing an explosive calisthenics bar dip"
-          className="w-full h-auto max-h-[62vh] object-contain mx-auto"
+          className="mx-auto h-auto w-full max-h-[48svh] object-contain"
         />
       </div>
 
       {/* Desktop Hero Image - anchored left, generous margin so it never crowds the copy */}
-      <div className="hidden md:block absolute inset-y-0 left-0 w-[42%] lg:w-[38%]">
-        <div className="h-full w-full py-10 lg:py-14 pl-6 lg:pl-10">
+      <div className="absolute inset-y-0 left-0 hidden w-[46%] md:block lg:w-[42%] xl:w-[38%]">
+        <div className="flex h-full w-full items-center overflow-hidden py-10 pl-6 lg:py-14 lg:pl-10">
           <img
-            src={desktopHero}
+            src={content.desktop_image}
             alt="Athlete performing an explosive calisthenics bar dip"
-            className="h-full w-full object-cover object-left"
+            className="h-auto max-h-full w-full origin-left scale-[2] object-contain object-left"
           />
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:pl-[46%] md:pr-12 lg:pr-20 flex flex-col items-center text-center md:items-end md:text-center md:flex-none pt-6 pb-14 md:py-0">
+      <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col items-center px-6 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-6 text-center md:flex-none md:px-0 md:py-0 md:pl-[26%] md:pr-12 lg:pr-20 xl:max-w-none xl:pl-[39%] xl:pr-5">
         {/* Dynamic Headline - Immersive Serif styling */}
         <motion.h1
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
-          className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-serif italic font-normal tracking-tight text-brand-text mb-3 sm:mb-6 leading-[0.95]"
+          className="hero-wide-headline mb-3 max-w-full font-serif text-5xl font-normal italic leading-[0.95] tracking-tight text-brand-text sm:mb-6 sm:text-6xl md:text-6xl lg:text-7xl xl:text-[5rem]"
         >
           {content.headline}
         </motion.h1>
@@ -55,7 +53,7 @@ export default function Hero({ content, onCtaClick }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-          className="text-xs sm:text-base md:text-base lg:text-lg text-brand-muted max-w-xs sm:max-w-2xl md:max-w-md lg:max-w-lg mx-auto md:mx-0 mb-6 sm:mb-12 font-sans font-light leading-relaxed tracking-wide"
+          className="hero-wide-copy mx-auto mb-6 max-w-xs font-sans text-xs font-light leading-relaxed tracking-wide text-brand-muted sm:mb-12 sm:max-w-2xl sm:text-base md:max-w-md md:text-base lg:max-w-lg lg:text-lg xl:text-xl"
         >
           {content.subheadline}
         </motion.p>
@@ -65,7 +63,7 @@ export default function Hero({ content, onCtaClick }: HeroProps) {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
-          className="flex items-center justify-center gap-5 w-full md:max-w-md lg:max-w-lg mx-auto md:mx-0 "
+          className="mx-auto flex w-full items-center justify-center gap-5 md:max-w-md lg:max-w-lg"
         >
           <button
             onClick={onCtaClick}
