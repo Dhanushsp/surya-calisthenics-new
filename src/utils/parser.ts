@@ -15,7 +15,9 @@ import {
   ProgramContent,
   FooterContent,
   VideoTestimonialItem,
-  VideoTestimonialsContent
+  VideoTestimonialsContent,
+  FaqItem,
+  FaqContent
 } from '../types';
 
 // Robust high-quality defaults matching the content.txt
@@ -162,6 +164,37 @@ export const DEFAULT_CONTENT: WebsiteContent = {
         videos: ["j71XgK-9Kco", "78zo1AeWSc8"]
       }
     ]
+  },
+  faq: {
+    section_eyebrow: "Common Questions",
+    section_title: "Frequently Asked Questions",
+    section_subtitle: "Everything you need to know before you start your bodyweight transformation.",
+    items: [
+      {
+        question: "Can beginners join?",
+        answer: "Yes, every exercise is scalable to match your current fitness level with beginner-friendly progressions."
+      },
+      {
+        question: "Do I need a gym?",
+        answer: "No, you can train anywhere using your body weight, though a pull-up bar or resistance bands help."
+      },
+      {
+        question: "Can I lose fat?",
+        answer: "Yes, high-energy bodyweight workouts burn calories, boost your metabolism, and help strip body fat."
+      },
+      {
+        question: "Can I build muscle?",
+        answer: "Yes, by applying progressive overload with tougher variations and leverage, you will build lean muscle."
+      },
+      {
+        question: "How many days per week?",
+        answer: "3 to 4 days per week is ideal for steady progress and proper recovery."
+      },
+      {
+        question: "Do you provide nutrition?",
+        answer: "Yes, I provide clear nutrition guidelines and calorie/macro targets to support your goals."
+      }
+    ]
   }
 };
 
@@ -261,7 +294,6 @@ export function parseContentTxt(text: string): WebsiteContent {
 
   // Build reviews dynamically
   const reviews: ReviewItem[] = [];
-  const reviewKeys = Object.keys(result.REVIEWS || {});
   
   for (let i = 1; i <= 20; i++) {
     const key = `review_${i}`;
@@ -370,6 +402,33 @@ export function parseContentTxt(text: string): WebsiteContent {
     items: videoTestimonialItems,
   };
 
+  // Build FAQ items dynamically
+  const faqItems: FaqItem[] = [];
+  const faqSource = result.FAQ || {};
+  const faqIndices = Object.keys(faqSource)
+    .map((key) => key.match(/^faq_(\d+)_question$/))
+    .filter((match): match is RegExpMatchArray => Boolean(match))
+    .map((match) => Number.parseInt(match[1], 10))
+    .sort((a, b) => a - b);
+
+  for (const i of faqIndices) {
+    const questionKey = `faq_${i}_question`;
+    const answerKey = `faq_${i}_answer`;
+    if (faqSource[questionKey]) {
+      faqItems.push({
+        question: faqSource[questionKey],
+        answer: faqSource[answerKey] || '',
+      });
+    }
+  }
+
+  const faq: FaqContent = {
+    section_eyebrow: result.FAQ?.section_eyebrow || DEFAULT_CONTENT.faq.section_eyebrow,
+    section_title: result.FAQ?.section_title || DEFAULT_CONTENT.faq.section_title,
+    section_subtitle: result.FAQ?.section_subtitle || DEFAULT_CONTENT.faq.section_subtitle,
+    items: faqItems.length > 0 ? faqItems : DEFAULT_CONTENT.faq.items,
+  };
+
   return {
     hero,
     floating_cta,
@@ -380,5 +439,6 @@ export function parseContentTxt(text: string): WebsiteContent {
     program,
     footer,
     videoTestimonials,
+    faq,
   };
 }

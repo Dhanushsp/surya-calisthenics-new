@@ -1,0 +1,142 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React from 'react';
+import { motion } from 'motion/react';
+import { Users, Trophy, CalendarCheck, Star, Play, ArrowRight } from 'lucide-react';
+
+interface StatItem {
+  icon: 'community' | 'transformations' | 'experience' | 'rating';
+  value: string;
+  label: string;
+}
+
+interface TransformationsCtaContent {
+  stats: StatItem[];
+  ctaHeadingLine1: string;
+  ctaHeadingLine2Plain: string;
+  ctaHeadingLine2Accent: string;
+  ctaButtonText: string;
+  secondaryLinkText: string;
+}
+
+// Default copy — matches the reference mockup. Override via the `content` prop if needed.
+const DEFAULT_CONTENT: TransformationsCtaContent = {
+  stats: [
+    { icon: 'community', value: '125K+', label: 'Community' },
+    { icon: 'transformations', value: '100+', label: 'Transformations' },
+    { icon: 'experience', value: '5+', label: 'Years Experience' },
+    { icon: 'rating', value: '5.0', label: 'Client Rating' },
+  ],
+  ctaHeadingLine1: 'Your transformation is',
+  ctaHeadingLine2Plain: 'the next',
+  ctaHeadingLine2Accent: 'success story.',
+  ctaButtonText: 'Become the Next Success Story',
+  secondaryLinkText: 'View More Stories',
+};
+
+const StatIconMap: Record<StatItem['icon'], typeof Users> = {
+  community: Users,
+  transformations: Trophy,
+  experience: CalendarCheck,
+  rating: Star,
+};
+
+interface TransformationsCtaProps {
+  content?: Partial<TransformationsCtaContent>;
+  onPrimaryCtaClick: () => void;
+}
+
+export default function TransformationsCta({ content, onPrimaryCtaClick }: TransformationsCtaProps) {
+  const c: TransformationsCtaContent = { ...DEFAULT_CONTENT, ...content };
+
+  // "View More Stories" hands off to the video testimonials carousel — the
+  // next place on the page with more client proof.
+  const scrollToMoreStories = () => {
+    const el = document.getElementById('video-testimonials');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section className="bg-brand-bg text-brand-text relative border-b border-brand-border" id="results-summary">
+      {/* Quick stats strip */}
+      <div className="max-w-5xl mx-auto px-6 pt-12 pb-10 md:pt-16 md:pb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-y-9 sm:gap-y-0"
+        >
+          {c.stats.map((stat, idx) => {
+            const Icon = StatIconMap[stat.icon];
+            return (
+              <div key={idx} className="relative flex flex-col items-center text-center px-3">
+                {idx > 0 && (
+                  <div className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-12 bg-brand-border" />
+                )}
+                <Icon className="h-7 w-7 md:h-8 md:w-8 text-brand-primary mb-3" strokeWidth={1.5} />
+                <span className="text-2xl md:text-3xl font-extrabold text-brand-text leading-none mb-1.5">
+                  {stat.value}
+                </span>
+                <span className="text-xs md:text-sm text-brand-muted font-sans">
+                  {stat.label}
+                </span>
+              </div>
+            );
+          })}
+        </motion.div>
+      </div>
+
+      {/* CTA banner */}
+      <div className="max-w-7xl mx-auto px-6 pb-12 md:pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+          className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8"
+        >
+          <div className="border-l-4 border-brand-primary pl-4 md:pl-6">
+            <p className="font-serif text-2xl sm:text-3xl md:text-4xl text-brand-text leading-snug">
+              {c.ctaHeadingLine1}
+              <br className="hidden sm:block" />
+              {c.ctaHeadingLine2Plain}{' '}
+              <span className="italic text-brand-primary">{c.ctaHeadingLine2Accent}</span>
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 shrink-0">
+            <motion.button
+              onClick={onPrimaryCtaClick}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="flex items-center gap-4 bg-brand-primary text-white pl-6 pr-2 py-2 rounded-full shadow-xl border border-brand-primary cursor-pointer transition-all duration-300"
+            >
+              <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em] font-mono text-center sm:whitespace-nowrap">
+                {c.ctaButtonText}
+              </span>
+              <span className="w-9 h-9 rounded-full bg-white text-brand-primary flex items-center justify-center shrink-0">
+                <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+              </span>
+            </motion.button>
+
+            <button
+              onClick={scrollToMoreStories}
+              className="inline-flex items-center gap-2.5 group cursor-pointer"
+            >
+              <span className="h-9 w-9 rounded-full border border-brand-text/20 flex items-center justify-center text-brand-text group-hover:border-brand-primary group-hover:text-brand-primary transition-colors shrink-0">
+                <Play className="h-3 w-3 fill-current ml-0.5" />
+              </span>
+              <span className="text-[11px] md:text-xs font-mono font-bold uppercase tracking-widest text-brand-text group-hover:text-brand-primary transition-colors whitespace-nowrap">
+                {c.secondaryLinkText}
+              </span>
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

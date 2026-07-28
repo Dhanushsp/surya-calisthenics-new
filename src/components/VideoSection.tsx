@@ -89,13 +89,13 @@ export default function VideoSection({ content }: VideoSectionProps) {
         {/* Section Header */}
         <div className="mb-12">
           <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold tracking-[0.3em] text-brand-primary uppercase mb-3">
-            <Film className="h-3.5 w-3.5 text-brand-primary" /> FREE MASTERCLASS
+            <Film className="h-3.5 w-3.5 text-brand-primary" /> INSIDE MY COACHING SYSTEM
           </span>
           <h2 className="text-4xl md:text-6xl font-serif italic font-normal tracking-tight text-brand-text">
-            Unlocking Bodyweight Power
+            Train smarter <span className="text-brand-primary">Progress faster</span>
           </h2>
-          <p className="text-brand-muted text-sm md:text-base max-w-xl mx-auto mt-4 font-sans font-light">
-            {content.video_title} — Watch Coach Surya break down the exact biomechanics of the handstand and muscle-up.
+          <p className="text-brand-muted text-sm md:text-sm max-w-xl mx-auto mt-4 font-sans font-light">
+            {content.video_title} — Discover the proven training methods, progressions, and coaching strategies I use to help athletes build real strength, master Basic to  advanced calisthenics skills, and achieve consistent results—without wasting time on ineffective workouts.
           </p>
         </div>
 

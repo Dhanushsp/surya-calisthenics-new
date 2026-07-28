@@ -40,11 +40,11 @@ trans_4_desc = Rebuilt posture, cured shoulder pain, and unlocked elite body con
 
 [ABOUT]
 coach_name = Coach Surya
-coach_title = Elite Calisthenics Specialist & Founder
+coach_title = WSWCF Calisthenics Coach & Founder
 coach_photo = /images/coach.jpeg
 certification_photo = /images/certificate.jpeg
 bio_heading = Meet Your Coach
-bio_paragraph_1 = Hey, I'm Surya. I spent over a decade perfecting bodyweight training to unlock movements most think are reserved for elite gymnasts. My mission is to demystify advanced calisthenics, turning complex skills into scientific, progressive training steps anyone can follow.
+bio_paragraph_1 = Hi, I'm Surya—a WSWCF Certified Calisthenics Coach.My mission is to help people build real strength, master bodyweight skills, and unlock their full potential through structured, personalized coaching. I believe every athlete progresses differently, so I focus on creating training programs that are practical, sustainable, and tailored to individual goals. Whether you're starting your first pull-up or working toward advanced calisthenics skills, I'm here to help you train smarter, stay consistent, and enjoy the journey.
 bio_paragraph_2 = Having coached over 500+ athletes worldwide through mobile-optimized virtual programs, I focus on building raw, functional strength, bulletproofing joints, and developing a shredded, high-performance physique without the need for heavy weights.
 
 [VIDEO]
@@ -89,8 +89,8 @@ secondary_cta_text = Follow on Instagram
 youtube_cta_text = Subscribe on YouTube
 
 [VIDEO_TESTIMONIALS]
-section_eyebrow = Proofs & Progress
-section_title = Athletes on the Bars
+section_eyebrow = Clients Progress Library
+section_title = Progress in 
 section_subtitle = Drag or swipe the video horizontally to slide through progress clips.
 ; Remove every client_* entry below to hide the section entirely.
 client_1_name = Marcus T.
@@ -116,3 +116,26 @@ client_4_skill = Overhead Mobility Restoration
 client_4_duration = 8 Weeks Protocol
 client_4_desc = Showing pain-free overhead extensions and fluid press movements after resolving severe impingement.
 client_4_videos = j71XgK-9Kco, 78zo1AeWSc8
+
+[FAQ]
+section_eyebrow = Common Questions
+section_title = Frequently Asked Questions
+section_subtitle = Everything you need to know before you start your bodyweight transformation.
+
+faq_1_question = Can beginners join?
+faq_1_answer = Yes, every exercise is scalable to match your current fitness level with beginner-friendly progressions.
+
+faq_2_question = Do I need a gym?
+faq_2_answer = No, you can train anywhere using your body weight, though a pull-up bar or resistance bands help.
+
+faq_3_question = Can I lose fat?
+faq_3_answer = Yes, high-energy bodyweight workouts burn calories, boost your metabolism, and help strip body fat.
+
+faq_4_question = Can I build muscle?
+faq_4_answer = Yes, by applying progressive overload with tougher variations and leverage, you will build lean muscle.
+
+faq_5_question = How many days per week?
+faq_5_answer = 3 to 4 days per week is ideal for steady progress and proper recovery.
+
+faq_6_question = Do you provide nutrition?
+faq_6_answer = Yes, I provide clear nutrition guidelines and calorie/macro targets to support your goals.

@@ -114,10 +114,10 @@ export default function VideoTestimonials({ content }: VideoTestimonialsProps) {
           <Film className="h-3 w-3 text-brand-primary" /> {section_eyebrow}
         </span>
         <h2 className="text-3xl md:text-5xl font-serif italic font-normal tracking-tight text-brand-text">
-          {section_title}
+          Progress in <span className="text-brand-primary">Motion</span>
         </h2>
         <p className="text-brand-muted text-xs md:text-sm max-w-sm mx-auto mt-1.5 font-light">
-          {section_subtitle}
+          Watch real training clips from my students as they build strength, master new skills, and progress through every stage of their calisthenics journey.
         </p>
       </div>
 

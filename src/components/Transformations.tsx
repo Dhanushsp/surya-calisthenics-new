@@ -5,14 +5,32 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Award, Zap, TrendingUp, Sparkles, ArrowLeftRight } from 'lucide-react';
+import {
+  TrendingUp,
+  Sparkles,
+  ArrowLeftRight,
+  Users,
+  Trophy,
+  CalendarCheck,
+  Star,
+  Play,
+  ArrowRight,
+} from 'lucide-react';
 import { TransformationItem } from '../types';
 
 interface TransformationsProps {
   items: TransformationItem[];
+  onCtaClick: () => void;
 }
 
-export default function Transformations({ items }: TransformationsProps) {
+const STATS = [
+  { icon: Users, value: '125K+', label: 'Community' },
+  { icon: Trophy, value: '100+', label: 'Transformations' },
+  { icon: CalendarCheck, value: '5+', label: 'Years Experience' },
+  { icon: Star, value: '5.0', label: 'Client Rating' },
+];
+
+export default function Transformations({ items, onCtaClick }: TransformationsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);   // whole section — used for vertical scroll progress
   const trackRef = useRef<HTMLDivElement>(null);     // the flex row that actually gets transformed
 
@@ -138,6 +156,13 @@ export default function Transformations({ items }: TransformationsProps) {
     setIsDragging(false);
   };
 
+  // "View More Stories" hands off to the video testimonials carousel — the
+  // next place on the page with more client proof.
+  const scrollToMoreStories = () => {
+    const el = document.getElementById('video-testimonials');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   if (items.length === 0) {
     return null;
   }
@@ -156,7 +181,7 @@ export default function Transformations({ items }: TransformationsProps) {
               ATHLETE EVOLUTION
             </span>
             <h2 className="text-3xl md:text-5xl font-serif italic font-normal tracking-tight text-brand-text leading-tight">
-              Before & After Gallery
+              Real People. <span className="text-brand-primary">Real Transformations.</span>
             </h2>
             <p className="text-brand-muted text-xs md:text-sm max-w-lg mt-2 font-light">
               Watch our athletes evolve on autoplay, or drag/swipe horizontally on any device to browse manually.
@@ -260,6 +285,70 @@ export default function Transformations({ items }: TransformationsProps) {
       <div className="flex justify-center items-center gap-1.5 mt-2.5 text-[9px] font-mono text-brand-muted uppercase tracking-widest opacity-60">
         <ArrowLeftRight className="h-2.5 w-2.5 animate-pulse" />
         <span>Drag to browse</span>
+      </div>
+
+      {/* Quick stats strip */}
+      <div className="max-w-3xl mx-auto px-6 mt-10 md:mt-14 relative z-10">
+        <div className="grid grid-cols-4 gap-y-4">
+          {STATS.map((stat, idx) => {
+            const Icon = stat.icon;
+            return (
+              <div key={idx} className="relative flex flex-col items-center text-center px-2">
+                {idx > 0 && (
+                  <div className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-8 bg-brand-border" />
+                )}
+                <Icon className="h-4 w-4 md:h-5 md:w-5 text-brand-primary mb-1.5" strokeWidth={1.5} />
+                <span className="text-sm md:text-base font-extrabold text-brand-text leading-none mb-0.5">
+                  {stat.value}
+                </span>
+                <span className="text-[8px] md:text-[9px] text-brand-muted font-sans uppercase tracking-wider">
+                  {stat.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* CTA banner */}
+      <div className="max-w-4xl mx-auto px-6 mt-8 md:mt-10 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 border-t border-brand-border pt-8">
+          <div className="border-l-4 border-brand-primary pl-3 md:pl-4">
+            <p className="font-serif text-lg sm:text-xl md:text-2xl text-brand-text leading-snug">
+              Your transformation is
+              <br className="hidden sm:block" />
+              {' '}the next <span className="italic text-brand-primary">success story.</span>
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 shrink-0">
+            <motion.button
+              onClick={onCtaClick}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="flex items-center gap-3 bg-brand-primary text-white pl-5 pr-1.5 py-1.5 rounded-full shadow-xl border border-brand-primary cursor-pointer transition-all duration-300"
+            >
+              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.13em] font-mono whitespace-nowrap">
+                Become the Next Success Story
+              </span>
+              <span className="w-7 h-7 rounded-full bg-white text-brand-primary flex items-center justify-center shrink-0">
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.5} />
+              </span>
+            </motion.button>
+
+            <button
+              onClick={scrollToMoreStories}
+              className="inline-flex items-center gap-2 group cursor-pointer"
+            >
+              <span className="h-7 w-7 rounded-full border border-brand-text/20 flex items-center justify-center text-brand-text group-hover:border-brand-primary group-hover:text-brand-primary transition-colors shrink-0">
+                <Play className="h-2.5 w-2.5 fill-current ml-0.5" />
+              </span>
+              <span className="text-[9px] md:text-[10px] font-mono font-bold uppercase tracking-widest text-brand-text group-hover:text-brand-primary transition-colors whitespace-nowrap">
+                View More Stories
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

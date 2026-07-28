@@ -17,6 +17,7 @@ import About from './components/About';
 import VideoSection from './components/VideoSection';
 import Reviews from './components/Reviews';
 import ProgramDetails from './components/ProgramDetails';
+import Faq from './components/Faq';
 import Footer from './components/Footer';
 import JoinForm from './components/JoinForm';
 
@@ -51,6 +52,12 @@ export default function App() {
     window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdk2ypkGUNJOYUwSAfm_Nun9gGeS0zgC4ycJyEtLlRJC1NV2g/viewform';
   };
 
+  // Used by the Hero's secondary CTA ("View Client Results") to jump to the transformations gallery
+  const scrollToResults = () => {
+    const el = document.getElementById('transformations');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   // Graceful initial loader screen
   if (loading || !content) {
     return (
@@ -71,7 +78,7 @@ export default function App() {
     <div className="bg-brand-bg min-h-screen text-brand-text font-sans antialiased selection:bg-brand-primary selection:text-white scroll-smooth">
       
       {/* 1. Hero Section */}
-      <Hero content={content.hero} onCtaClick={triggerSignupPortal} />
+      <Hero onPrimaryCtaClick={triggerSignupPortal} onSecondaryCtaClick={scrollToResults} />
 
       {/* 2. Persistent Floating CTA */}
       <FloatingCta content={content.floating_cta} onClick={triggerSignupPortal} />
@@ -93,6 +100,9 @@ export default function App() {
 
       {/* 8. Program Details */}
       <ProgramDetails content={content.program} onCtaClick={triggerSignupPortal} />
+
+      {/* 9. FAQ */}
+      <Faq content={content.faq} />
 
       {/* Dedicated On-Page Signup Segment (for structural completeness and anchor targets) */}
       {/* <section className="py-24 bg-brand-bg border-t border-brand-border px-6 relative" id="enrollment-portal">

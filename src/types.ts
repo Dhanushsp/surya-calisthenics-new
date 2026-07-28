@@ -84,6 +84,18 @@ export interface VideoTestimonialsContent {
   items: VideoTestimonialItem[];
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface FaqContent {
+  section_eyebrow: string;
+  section_title: string;
+  section_subtitle: string;
+  items: FaqItem[];
+}
+
 export interface WebsiteContent {
   hero: HeroContent;
   floating_cta: FloatingCtaContent;
@@ -94,4 +106,5 @@ export interface WebsiteContent {
   program: ProgramContent;
   footer: FooterContent;
   videoTestimonials: VideoTestimonialsContent;
+  faq: FaqContent;
 }
