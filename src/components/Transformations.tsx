@@ -17,6 +17,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { TransformationItem } from '../types';
+import review1 from '../images/review1.png';
 
 interface TransformationsProps {
   items?: TransformationItem[];
@@ -33,9 +34,9 @@ const STATS = [
 export default function Transformations({ items: itemsProp, onCtaClick }: TransformationsProps) {
   const defaultItems: TransformationItem[] = [
     {
-      img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop',
-      name: 'Marcus T. - 12 Weeks',
-      desc: 'Went from 0 to 12 clean pull-ups, dropping 8% body fat.'
+      img:  review1,
+      name: ' Nanthesh',
+      desc: 'Meet Nanthesh, all the way from the Netherlands! Over the past three months, we dove into online calisthenics training together, starting with a full assessment of his pushing, pulling, and overall endurance. From those fundamentals, we crafted a personalized plan that’s taken him from the basics right into the realm of intermediate skills. It’s been amazing to watch his transformation, and there’s so much more to come. Stay tuned for his journey!'
     },
     {
       img: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop',
@@ -251,15 +252,15 @@ export default function Transformations({ items: itemsProp, onCtaClick }: Transf
                   {/* Card Header */}
                   <div className="p-3 border-b border-brand-border bg-brand-card/50">
                     <div className="flex items-center justify-between text-[8px] font-mono text-brand-muted tracking-wider mb-1">
-                      <span className={`inline-flex items-center gap-0.5 font-bold tracking-widest uppercase text-[7px] px-2 py-0.5 ${
+                      {/* <span className={`inline-flex items-center gap-0.5 font-bold tracking-widest uppercase text-[7px] px-2 py-0.5 ${
                         stage === 'AFTER'
                           ? 'bg-brand-primary text-white font-extrabold'
                           : 'bg-brand-primary/10 text-brand-primary border border-brand-primary/20'
                       }`}>
                         {stage === 'AFTER' && <Sparkles className="h-2 w-2" />}
                         {stage}
-                      </span>
-                      <span className="font-bold">{duration}</span>
+                      </span> */}
+                      {/* <span className="font-bold">{duration}</span> */}
                     </div>
                     <h4 className="text-xs md:text-sm font-serif italic font-normal text-brand-text tracking-tight truncate">
                       {item.name}
@@ -288,8 +289,8 @@ export default function Transformations({ items: itemsProp, onCtaClick }: Transf
                       {item.desc}
                     </p>
                     <div className="flex items-center justify-between text-[8px] font-mono text-brand-muted tracking-wider pt-2 border-t border-brand-border">
-                      <span className="opacity-80">PROGRAM</span>
-                      <span className="text-brand-primary font-bold tracking-widest uppercase text-[8px] font-mono">{program}</span>
+                      {/* <span className="opacity-80">PROGRAM</span>
+                      <span className="text-brand-primary font-bold tracking-widest uppercase text-[8px] font-mono">{program}</span> */}
                     </div>
                   </div>
                 </motion.div>
