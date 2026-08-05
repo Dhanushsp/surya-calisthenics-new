@@ -125,13 +125,12 @@ const SocialIconMap: Record<SocialPlatform, React.ComponentType<{ className?: st
 };
 
 interface HeroProps {
-  content?: Partial<HeroContentV2>;
   onPrimaryCtaClick: () => void;
   onSecondaryCtaClick: () => void;
 }
 
-export default function Hero({ content, onPrimaryCtaClick, onSecondaryCtaClick }: HeroProps) {
-  const c: HeroContentV2 = { ...DEFAULT_HERO, ...content };
+export default function Hero({ onPrimaryCtaClick, onSecondaryCtaClick }: HeroProps) {
+  const c: HeroContentV2 = DEFAULT_HERO;
 
   return (
     <section className="relative w-full bg-white overflow-hidden" id="hero">

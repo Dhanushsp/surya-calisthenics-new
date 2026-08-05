@@ -5,15 +5,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FloatingCtaContent } from '../types';
 import { Flame } from 'lucide-react';
 
 interface FloatingCtaProps {
-  content: FloatingCtaContent;
   onClick: () => void;
 }
 
-export default function FloatingCta({ content, onClick }: FloatingCtaProps) {
+export default function FloatingCta({ onClick }: FloatingCtaProps) {
+  const content = { button_text: 'Join Program Now' };
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

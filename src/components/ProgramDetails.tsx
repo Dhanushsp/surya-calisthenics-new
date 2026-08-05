@@ -9,7 +9,6 @@ import * as LucideIcons from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface ProgramDetailsProps {
-  content: ProgramContent;
   onCtaClick: () => void;
 }
 
@@ -30,7 +29,34 @@ const getIconComponent = (iconName: string) => {
   }
 };
 
-export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsProps) {
+export default function ProgramDetails({ onCtaClick }: ProgramDetailsProps) {
+  const content = {
+    section_title: 'Inside the Coaching Experience',
+    section_subtitle: 'Everything you need to build strength, master advanced calisthenics skills, and stay consistent—all in one personalized coaching system designed around your goals.',
+    supporting_image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop',
+    points: [
+      {
+        icon: 'Target',
+        title: 'PERSONALIZED SKILL PROGRESSIONS',
+        text: 'Master pull-ups, muscle-ups, handstands, front lever, and planche through structured progressions tailored to your level.'
+      },
+      {
+        icon: 'Flame',
+        title: 'STRENGTH & PHYSIQUE DEVELOPMENT',
+        text: 'Build lean muscle, increase [obscured] strength, and develop [obscured] athletic physique with progressive bodyweight training.'
+      },
+      {
+        icon: 'Shield',
+        title: 'MOBILITY & INJURY PREVENTION',
+        text: 'Improve flexibility, joint health, and movement quality with mobility routines that help you train consistently and reduce injury risk.'
+      },
+      {
+        icon: 'Zap',
+        title: 'YOUR COACHING DASHBOARD',
+        text: 'Access workouts, demonstration videos, progress tracking, form reviews, and direct coach support—[obscured]'
+      }
+    ]
+  };
   return (
     <section className="py-24 bg-brand-bg text-brand-text relative border-t border-brand-border" id="program">
       <div className="max-w-7xl mx-auto px-6 relative z-10">

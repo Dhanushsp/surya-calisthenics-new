@@ -8,16 +8,59 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Volume2, VolumeX, Film, Play, TrendingUp, ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { VideoTestimonialsContent } from '../types';
-
-interface VideoTestimonialsProps {
-  content: VideoTestimonialsContent;
-}
 
 const AUTO_SCROLL_SPEED = 0.55;
 
-export default function VideoTestimonials({ content }: VideoTestimonialsProps) {
-  const { items, section_eyebrow, section_title, section_subtitle } = content;
+const DEFAULT_VIDEO_TESTIMONIALS = {
+  section_eyebrow: 'Clients Progress Library',
+  section_title: 'Progress in Motion',
+  section_subtitle: 'Drag or swipe the video horizontally to slide through progress clips.',
+  items: [
+    {
+      athlete: 'Marcus T.',
+      badge: 'MUSCLE-UP',
+      videoId: '78zo1AeWSc8',
+      videoDuration: '2:14',
+      weekLabel: 'WEEK 12 • MUSCLE-UP PROGRESS',
+      statHeadline: 'From 0 to 3 Strict Muscle-Ups',
+      statSubtext: '12 Weeks Transformation',
+      desc: 'Demonstrating solid front lever control and explosive muscle-up strength after consistent progressions.'
+    },
+    {
+      athlete: 'Sarah K.',
+      badge: 'HANDSTAND',
+      videoId: 'p9gYwJ8I9uY',
+      videoDuration: '1:58',
+      weekLabel: 'WEEK 16 • HANDSTAND BREAKTHROUGH',
+      statHeadline: 'Built shoulder stability and balance',
+      statSubtext: '16 Weeks Progress',
+      desc: 'Achieving clean freestanding holds and tight body alignment through targeted shoulder work.'
+    },
+    {
+      athlete: 'Alex R.',
+      badge: 'STRENGTH',
+      videoId: 'EGMG_7m_xH4',
+      videoDuration: '2:05',
+      weekLabel: 'WEEK 24 • STRENGTH EVOLUTION',
+      statHeadline: 'Clean gymnastic ring transitions',
+      statSubtext: '24 Weeks Mastery',
+      desc: 'Executing fluid ring muscle-up flows and stable support holds after systematic strength buildup.'
+    },
+    {
+      athlete: 'David L.',
+      badge: 'MOBILITY',
+      videoId: 'j71XgK-9Kco',
+      videoDuration: '1:52',
+      weekLabel: 'WEEK 8 • MOBILITY UPGRADE',
+      statHeadline: 'Pain-free overhead range',
+      statSubtext: '8 Weeks Reset',
+      desc: 'Restoring overhead movement quality and smooth press patterns through mobility-focused training.'
+    }
+  ]
+};
+
+export default function VideoTestimonials() {
+  const { items, section_eyebrow, section_title, section_subtitle } = DEFAULT_VIDEO_TESTIMONIALS;
 
   if (items.length === 0) {
     return null;
@@ -200,6 +243,32 @@ export default function VideoTestimonials({ content }: VideoTestimonialsProps) {
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
   }, [currentVideoId, isMuted]);
+
+  // When popup opens, try to ensure playback and audio state (unmute) via postMessage.
+  useEffect(() => {
+    if (!isExpanded) return;
+
+    const tryUnmute = () => {
+      if (!iframeRef.current?.contentWindow) return;
+      try {
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'playVideo', args: '' }),
+          '*'
+        );
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: isMuted ? 'mute' : 'unMute', args: '' }),
+          '*'
+        );
+      } catch (err) {
+        // ignore
+      }
+    };
+
+    // First attempt immediately, then a short retry to satisfy browser/autoplay timing
+    tryUnmute();
+    const t = window.setTimeout(tryUnmute, 300);
+    return () => clearTimeout(t);
+  }, [isExpanded, isMuted]);
 
   useEffect(() => {
     if (!isExpanded) return;

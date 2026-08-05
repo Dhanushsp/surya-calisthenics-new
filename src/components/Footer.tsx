@@ -4,15 +4,23 @@
  */
 
 import React from 'react';
-import { FooterContent } from '../types';
+// Footer content hardcoded
 import { Instagram, Mail, Phone, ArrowUp, ChevronRight, Activity, Youtube } from 'lucide-react';
 
 interface FooterProps {
-  content: FooterContent;
   onJoinCtaClick: () => void;
 }
 
-export default function Footer({ content, onJoinCtaClick }: FooterProps) {
+export default function Footer({ onJoinCtaClick }: FooterProps) {
+  const content = {
+    instagram_url: 'https://instagram.com/calisthenicscoach',
+    youtube_url: 'https://www.youtube.com',
+    contact_email: 'contact@bodyweightathlete.com',
+    contact_phone: '+1 (555) 019-3829',
+    copyright: '© 2026 Surya Calisthenics. All rights reserved.',
+    secondary_cta_text: 'Follow on Instagram',
+    youtube_cta_text: 'Subscribe on YouTube'
+  };
   
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

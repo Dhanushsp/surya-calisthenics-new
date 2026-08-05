@@ -4,14 +4,38 @@
  */
 
 import React from 'react';
-import { ReviewItem } from '../types';
 import { Star, Quote, ShieldCheck } from 'lucide-react';
 
-interface ReviewsProps {
-  items: ReviewItem[];
-}
+interface ReviewsProps {}
 
-export default function Reviews({ items }: ReviewsProps) {
+export default function Reviews(_: ReviewsProps) {
+  const items = [
+    {
+      text: "Able to gain some shape in shoulder and chest, I realized an increase in hand power and can do 1 to 2 pullups now; before starting I could not do even one. I also saw strength gains in my thighs, though my core still needs work. Overall, visible improvement in some parts; I need to stay consistent 5 days a week to see more positives.",
+      author: 'Basker (42yr old)'
+    },
+    {
+      text: "It's been 3 months of a great journey into the calisthenics world with you. I was skeptical about online coaching at first, but now I feel very happy with the decision. You analyzed my workouts and tailored every exercise, making me comfortable and confident. Thank you for pushing my limits and helping me unlock new skills.",
+      author: 'Sidharth (32yr old)'
+    },
+    {
+      text: "These two months with coach Surya have been amazing. My endurance, flexibility, and strength improved a lot, and I learned the correct form for every exercise plus calisthenics basics like frog pose. This journey is already amazing and there is a long way to go.",
+      author: 'Yasin (30yr old)'
+    },
+    {
+      text: "Intha two months ennaku nalla challenge ah irunthuchi. Everyday pain feel panna atha enjoy panna, every midnight ennoda kai semma pain tharum but I will not stop. Naa strong ah irukken nu feel pandren. I can feel my body shape changing and my blood sugar is under control. Totally I feel so happy.",
+      author: 'Pooja (19yr old)'
+    },
+    {
+      text: "Overall, nice experience for the first 3 months bro. I saw better changes than a year at gym without taking protein supplements. Weekly workout variation made it more interesting and motivating. Calisthenics became a stress buster while I handle study pressure, and I am renewing for another 3 months.",
+      author: 'Kumar (28yr old)'
+    },
+    {
+      text: "After just 12 classes, I cannot thank Surya enough for the incredible change I’ve experienced. I was unsure of my strength and flexibility at first, but his expertise, patience, and motivation changed my perspective on fitness. Moves that once seemed impossible, like pull-ups, now feel within reach.",
+      author: 'Anonymous (35yr old)'
+    }
+  ];
+
   // Duplicate the list of reviews to create a seamless infinite loop visual effect
   const marqueeItems = [...items, ...items, ...items];
 

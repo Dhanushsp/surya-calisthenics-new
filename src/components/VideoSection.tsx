@@ -7,15 +7,14 @@
 
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { VideoContent } from '../types';
+// VideoSection content hardcoded
 import { Film, Volume2, VolumeX } from 'lucide-react';
 
-interface VideoSectionProps {
-  content: VideoContent;
-}
+interface VideoSectionProps {}
 
-export default function VideoSection({ content }: VideoSectionProps) {
+export default function VideoSection(_: VideoSectionProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const content = { youtube_id: '78zo1AeWSc8', video_title: 'Calisthenics Masterclass & Progression Secrets' };
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // The user's *intent*: do they want sound on, if the video is visible?

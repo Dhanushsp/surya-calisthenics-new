@@ -5,8 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { WebsiteContent } from './types';
-import { DEFAULT_CONTENT, parseContentTxt } from './utils/parser';
+// Content is now hardcoded inside each component.
 
 // Core layout section components
 import Hero from './components/Hero';
@@ -25,28 +24,7 @@ import JoinForm from './components/JoinForm';
 import { X, Award, Flame, Zap, ShieldCheck } from 'lucide-react';
 
 export default function App() {
-  const [content, setContent] = useState<WebsiteContent | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  // Fetch and parse content.txt on mount
-  useEffect(() => {
-    fetch('/content.txt')
-      .then((res) => {
-        if (!res.ok) throw new Error('File fetch returned ' + res.status);
-        return res.text();
-      })
-      .then((text) => {
-        const parsed = parseContentTxt(text);
-        setContent(parsed);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.warn('Network issue fetching content.txt, applying premium local cache: ', error);
-        setContent(DEFAULT_CONTENT);
-        setLoading(false);
-      });
-  }, []);
 
   const triggerSignupPortal = () => {
     window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdk2ypkGUNJOYUwSAfm_Nun9gGeS0zgC4ycJyEtLlRJC1NV2g/viewform';
@@ -58,21 +36,7 @@ export default function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Graceful initial loader screen
-  if (loading || !content) {
-    return (
-      <div className="h-screen w-screen bg-brand-bg flex flex-col items-center justify-center text-brand-text font-mono">
-        <motion.div
-          animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-4"
-        >
-          <div className="h-8 w-8 border-2 border-brand-primary border-t-transparent animate-spin" />
-          <span className="text-[10px] tracking-[0.25em] text-brand-muted font-bold">LOADING DIGITAL CORE...</span>
-        </motion.div>
-      </div>
-    );
-  }
+  // No async content loading — render immediately.
 
   return (
     <div className="bg-brand-bg min-h-screen text-brand-text font-sans antialiased selection:bg-brand-primary selection:text-white scroll-smooth">
@@ -81,28 +45,28 @@ export default function App() {
       <Hero onPrimaryCtaClick={triggerSignupPortal} onSecondaryCtaClick={scrollToResults} />
 
       {/* 2. Persistent Floating CTA */}
-      <FloatingCta content={content.floating_cta} onClick={triggerSignupPortal} />
+      <FloatingCta onClick={triggerSignupPortal} />
 
       {/* 3. Video Section */}
-      <VideoSection content={content.video} />
+      <VideoSection />
 
       {/* 4. Client Transformations Gallery */}
-      <Transformations items={content.transformations} />
+      <Transformations onCtaClick={triggerSignupPortal} />
 
       {/* 5. Video Testimonials Carousel */}
-      <VideoTestimonials content={content.videoTestimonials} />
+      <VideoTestimonials />
 
       {/* 6. About the Coach */}
-      <About content={content.about} />
+      <About onCtaClick={triggerSignupPortal} />
 
       {/* 7. Reviews / Testimonials (Infinite Marquee) */}
-      <Reviews items={content.reviews} />
+      <Reviews />
 
       {/* 8. Program Details */}
-      <ProgramDetails content={content.program} onCtaClick={triggerSignupPortal} />
+      <ProgramDetails onCtaClick={triggerSignupPortal} />
 
       {/* 9. FAQ */}
-      <Faq content={content.faq} />
+      <Faq />
 
       {/* Dedicated On-Page Signup Segment (for structural completeness and anchor targets) */}
       {/* <section className="py-24 bg-brand-bg border-t border-brand-border px-6 relative" id="enrollment-portal">
@@ -124,7 +88,7 @@ export default function App() {
       </section> */}
 
       {/* 8. Footer */}
-      <Footer content={content.footer} onJoinCtaClick={triggerSignupPortal} />
+      <Footer onJoinCtaClick={triggerSignupPortal} />
 
       {/* Modal Popup Sign-Up Portal */}
       <AnimatePresence>

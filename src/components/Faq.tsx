@@ -6,14 +6,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, HelpCircle } from 'lucide-react';
-import { FaqContent } from '../types';
+interface FaqProps {}
 
-interface FaqProps {
-  content: FaqContent;
-}
-
-export default function Faq({ content }: FaqProps) {
-  const { items, section_eyebrow, section_title, section_subtitle } = content;
+export default function Faq(_: FaqProps) {
+  const section_eyebrow = 'Common Questions';
+  const section_title = 'Frequently Asked Questions';
+  const section_subtitle = 'Everything you need to know before you start your bodyweight transformation.';
+  const items = [
+    { question: 'Can beginners join?', answer: 'Yes, every exercise is scalable to match your current fitness level with beginner-friendly progressions.' },
+    { question: 'Do I need a gym?', answer: 'No, you can train anywhere using your body weight, though a pull-up bar or resistance bands help.' },
+    { question: 'Can I lose fat?', answer: 'Yes, high-energy bodyweight workouts burn calories, boost your metabolism, and help strip body fat.' },
+    { question: 'Can I build muscle?', answer: 'Yes, by applying progressive overload with tougher variations and leverage, you will build lean muscle.' },
+    { question: 'How many days per week?', answer: '3 to 4 days per week is ideal for steady progress and proper recovery.' },
+    { question: 'Do you provide nutrition?', answer: 'Yes, I provide clear nutrition guidelines and calorie/macro targets to support your goals.' },
+  ];
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   if (!items || items.length === 0) {

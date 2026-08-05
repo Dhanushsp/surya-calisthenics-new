@@ -19,7 +19,7 @@ import {
 import { TransformationItem } from '../types';
 
 interface TransformationsProps {
-  items: TransformationItem[];
+  items?: TransformationItem[];
   onCtaClick: () => void;
 }
 
@@ -30,7 +30,30 @@ const STATS = [
   { icon: Star, value: '5.0', label: 'Client Rating' },
 ];
 
-export default function Transformations({ items, onCtaClick }: TransformationsProps) {
+export default function Transformations({ items: itemsProp, onCtaClick }: TransformationsProps) {
+  const defaultItems: TransformationItem[] = [
+    {
+      img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop',
+      name: 'Marcus T. - 12 Weeks',
+      desc: 'Went from 0 to 12 clean pull-ups, dropping 8% body fat.'
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop',
+      name: 'Sarah K. - 16 Weeks',
+      desc: 'Achieved a solid 15-second freestanding handstand and elite core power.'
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=600&auto=format&fit=crop',
+      name: 'Alex R. - 24 Weeks',
+      desc: 'Mastered the full muscle-up and unlocked advanced gymnastic ring flows.'
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=600&auto=format&fit=crop',
+      name: 'David L. - 8 Weeks',
+      desc: 'Rebuilt posture, cured shoulder pain, and unlocked elite body control.'
+    }
+  ];
+  const items: TransformationItem[] = itemsProp && itemsProp.length > 0 ? itemsProp : defaultItems;
   const sectionRef = useRef<HTMLDivElement>(null);   // whole section — used for vertical scroll progress
   const trackRef = useRef<HTMLDivElement>(null);     // the flex row that actually gets transformed
 

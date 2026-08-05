@@ -4,16 +4,24 @@
  */
 
 import React from 'react';
-import { AboutContent } from '../types';
+// About content hardcoded per site defaults
 import { Star, Globe, UserCheck, Link2, Play, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface AboutProps {
-  content: AboutContent;
   onCtaClick: () => void;
 }
 
-export default function About({ content, onCtaClick }: AboutProps) {
+export default function About({ onCtaClick }: AboutProps) {
+  const content = {
+    coach_name: 'Coach Surya',
+    coach_title: 'Elite Calisthenics Specialist & Founder',
+    coach_photo: '/images/coach.jpeg',
+    certification_photo: '/images/certificate.jpeg',
+    bio_heading: 'Meet Your Coach',
+    bio_paragraph_1: "Hey, I'm Surya. I spent over a decade perfecting bodyweight training to unlock movements most think are reserved for elite gymnasts. My mission is to demystify advanced calisthenics, turning complex skills into scientific, progressive training steps anyone can follow.",
+    bio_paragraph_2: "Having coached over 500+ athletes worldwide through mobile-optimized virtual programs, I focus on building raw, functional strength, bulletproofing joints, and developing a shredded, high-performance physique without the need for heavy weights."
+  };
   const highlights = [
     {
       icon: Star,
