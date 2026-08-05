@@ -70,11 +70,13 @@ export interface FooterContent {
 
 export interface VideoTestimonialItem {
   athlete: string;
-  skill: string;
-  duration: string;
+  badge: string;
+  videoDuration: string;
+  weekLabel: string;
+  statHeadline: string;
+  statSubtext: string;
   desc: string;
-  id: string;
-  videos: string[];
+  videoId: string;
 }
 
 export interface VideoTestimonialsContent {

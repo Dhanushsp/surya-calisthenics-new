@@ -64,8 +64,9 @@ src/
   images/
     certificate.jpeg
     coach.jpeg
-    desktop-hero.png
+    hero-image.png
     mobile-hero.png
+    qqqq.png
     ww.png
   utils/
     parser.ts
@@ -197,6 +198,164 @@ export default function Faq({ content }: FaqProps) {
         </div>
 
       </div>
+    </section>
+  );
+}
+</file>
+
+<file path="src/components/FloatingCta.tsx">
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { FloatingCtaContent } from '../types';
+import { Flame } from 'lucide-react';
+
+interface FloatingCtaProps {
+  content: FloatingCtaContent;
+  onClick: () => void;
+}
+
+export default function FloatingCta({ content, onClick }: FloatingCtaProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show floating CTA once user scrolls past hero section (1 h-screen)
+      if (window.scrollY > window.innerHeight - 150) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: 30 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          className="fixed bottom-8 right-8 z-50 pointer-events-auto"
+        >
+          <motion.button
+            onClick={onClick}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-3 bg-brand-primary text-white pl-6 pr-2 py-2 rounded-full shadow-2xl border border-brand-primary group cursor-pointer transition-all duration-300"
+          >
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em] font-mono">{content.button_text}</span>
+            <div className="w-8 h-8 rounded-full bg-white text-brand-primary flex items-center justify-center animate-pulse shrink-0">
+              <svg className="w-3 h-3 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </motion.button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+</file>
+
+<file path="src/components/Reviews.tsx">
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React from 'react';
+import { ReviewItem } from '../types';
+import { Star, Quote, ShieldCheck } from 'lucide-react';
+
+interface ReviewsProps {
+  items: ReviewItem[];
+}
+
+export default function Reviews({ items }: ReviewsProps) {
+  // Duplicate the list of reviews to create a seamless infinite loop visual effect
+  const marqueeItems = [...items, ...items, ...items];
+
+  return (
+    <section className="py-24 bg-brand-bg overflow-hidden relative border-t border-b border-brand-border" id="reviews">
+      
+      {/* Section Header */}
+      <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
+        <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-brand-primary uppercase block mb-3">
+          ATHLETE TESTIMONIALS
+        </span>
+        <h2 className="text-4xl md:text-6xl font-serif italic font-normal tracking-tight text-brand-text">
+          What My Athletes Say
+        </h2>
+        <p className="text-brand-muted text-sm max-w-lg mx-auto mt-4 font-sans font-light">
+          Every review reflects a journey of consistency, discipline, and progress. Hear directly from athletes who transformed their strength, confidence, and performance through personalized coaching.
+        </p>
+      </div>
+
+      {/* Infinite Horizontal Marquee Container */}
+      <div className="relative w-full overflow-hidden flex py-4 pointer-events-auto">
+        
+        {/* Soft edge gradients to fade out the marquee on left and right borders */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-brand-bg to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-brand-bg to-transparent z-10 pointer-events-none" />
+
+        {/* Scrolling Track */}
+        <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] whitespace-nowrap">
+          {marqueeItems.map((review, idx) => (
+            <div
+              key={idx}
+              className="w-[280px] sm:w-[320px] md:w-[360px] shrink-0 bg-brand-card border border-brand-border rounded-none p-6 md:p-7 relative flex flex-col justify-between shadow-xl select-none whitespace-normal transition-all duration-300 hover:border-brand-primary/40"
+            >
+              {/* Background Quote Icon Accent */}
+              <Quote className="absolute right-5 top-5 h-10 w-10 text-brand-primary/5 pointer-events-none" />
+
+              {/* Red Star Rating */}
+              <div className="flex text-brand-primary gap-0.5 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                ))}
+              </div>
+
+              {/* Review Text */}
+              <p className="text-brand-text font-sans text-sm md:text-base leading-relaxed mb-6 italic font-light">
+                "{review.text}"
+              </p>
+
+              {/* Author Info */}
+              <div className="flex items-center gap-2.5 mt-auto border-t border-brand-border pt-4">
+                <div className="h-7 w-7 rounded-none bg-brand-primary flex items-center justify-center text-[10px] font-bold text-white font-mono border border-brand-primary uppercase">
+                  {review.author.slice(0, 2).toUpperCase()}
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-brand-text font-sans">
+                    {review.author}
+                  </h4>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+      {/* Embedded CSS for marquee animation and mask styling */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.33%); }
+        }
+        .animate-marquee {
+          animation: marquee 35s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }
@@ -341,484 +500,6 @@ export default function TransformationsCta({ content, onPrimaryCtaClick }: Trans
             </button>
           </div>
         </motion.div>
-      </div>
-    </section>
-  );
-}
-</file>
-
-<file path="src/components/FloatingCta.tsx">
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { FloatingCtaContent } from '../types';
-import { Flame } from 'lucide-react';
-
-interface FloatingCtaProps {
-  content: FloatingCtaContent;
-  onClick: () => void;
-}
-
-export default function FloatingCta({ content, onClick }: FloatingCtaProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Show floating CTA once user scrolls past hero section (1 h-screen)
-      if (window.scrollY > window.innerHeight - 150) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 30 }}
-          transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="fixed bottom-8 right-8 z-50 pointer-events-auto"
-        >
-          <motion.button
-            onClick={onClick}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 bg-brand-primary text-white pl-6 pr-2 py-2 rounded-full shadow-2xl border border-brand-primary group cursor-pointer transition-all duration-300"
-          >
-            <span className="text-[10px] font-bold uppercase tracking-[0.15em] font-mono">{content.button_text}</span>
-            <div className="w-8 h-8 rounded-full bg-white text-brand-primary flex items-center justify-center animate-pulse shrink-0">
-              <svg className="w-3 h-3 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </div>
-          </motion.button>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-</file>
-
-<file path="src/components/Reviews.tsx">
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React from 'react';
-import { ReviewItem } from '../types';
-import { Star, Quote, ShieldCheck } from 'lucide-react';
-
-interface ReviewsProps {
-  items: ReviewItem[];
-}
-
-export default function Reviews({ items }: ReviewsProps) {
-  // Duplicate the list of reviews to create a seamless infinite loop visual effect
-  const marqueeItems = [...items, ...items, ...items];
-
-  return (
-    <section className="py-24 bg-brand-bg overflow-hidden relative border-t border-b border-brand-border" id="reviews">
-      
-      {/* Section Header */}
-      <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
-        <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-brand-primary uppercase block mb-3">
-          ATHLETE TESTIMONIALS
-        </span>
-        <h2 className="text-4xl md:text-6xl font-serif italic font-normal tracking-tight text-brand-text">
-          What the Community Says
-        </h2>
-        <p className="text-brand-muted text-sm max-w-lg mx-auto mt-4 font-sans font-light">
-          Real feedback from dedicated individuals who have mastered their own bodyweight through our training environment.
-        </p>
-      </div>
-
-      {/* Infinite Horizontal Marquee Container */}
-      <div className="relative w-full overflow-hidden flex py-4 pointer-events-auto">
-        
-        {/* Soft edge gradients to fade out the marquee on left and right borders */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-brand-bg to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-brand-bg to-transparent z-10 pointer-events-none" />
-
-        {/* Scrolling Track */}
-        <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] whitespace-nowrap">
-          {marqueeItems.map((review, idx) => (
-            <div
-              key={idx}
-              className="w-[280px] sm:w-[320px] md:w-[360px] shrink-0 bg-brand-card border border-brand-border rounded-none p-6 md:p-7 relative flex flex-col justify-between shadow-xl select-none whitespace-normal transition-all duration-300 hover:border-brand-primary/40"
-            >
-              {/* Background Quote Icon Accent */}
-              <Quote className="absolute right-5 top-5 h-10 w-10 text-brand-primary/5 pointer-events-none" />
-
-              {/* Red Star Rating */}
-              <div className="flex text-brand-primary gap-0.5 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                ))}
-              </div>
-
-              {/* Review Text */}
-              <p className="text-brand-text font-sans text-sm md:text-base leading-relaxed mb-6 italic font-light">
-                "{review.text}"
-              </p>
-
-              {/* Author Info */}
-              <div className="flex items-center gap-2.5 mt-auto border-t border-brand-border pt-4">
-                <div className="h-7 w-7 rounded-none bg-brand-primary flex items-center justify-center text-[10px] font-bold text-white font-mono border border-brand-primary uppercase">
-                  {review.author.slice(0, 2).toUpperCase()}
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-brand-text font-sans flex items-center gap-1.5">
-                    <span>{review.author}</span>
-                    <ShieldCheck className="h-3.5 w-3.5 text-brand-primary/60 fill-brand-primary/10 shrink-0" />
-                  </h4>
-                  <span className="text-[9px] text-brand-muted font-mono uppercase tracking-widest font-bold">Verified Athlete</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-      </div>
-
-      {/* Embedded CSS for marquee animation and mask styling */}
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-33.33%); }
-        }
-        .animate-marquee {
-          animation: marquee 35s linear infinite;
-        }
-      `}</style>
-    </section>
-  );
-}
-</file>
-
-<file path="src/components/VideoTestimonials.tsx">
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Volume2, VolumeX, ShieldCheck, Film, X, Play, ChevronUp, ChevronDown } from 'lucide-react';
-import { VideoTestimonialsContent } from '../types';
-
-interface VideoTestimonialsProps {
-  content: VideoTestimonialsContent;
-}
-
-export default function VideoTestimonials({ content }: VideoTestimonialsProps) {
-  const { items, section_eyebrow, section_title, section_subtitle } = content;
-
-  if (items.length === 0) {
-    return null;
-  }
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [direction, setDirection] = useState(0);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  const currentClient = items[activeIndex];
-  const currentVideoId = currentClient.videos[activeVideoIndex] || currentClient.id;
-
-  const getIndex = (offset: number) => {
-    return (activeIndex + offset + items.length) % items.length;
-  };
-
-  const handlePrev = () => {
-    setDirection(-1);
-    setActiveVideoIndex(0);
-    setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
-  };
-
-  const handleNext = () => {
-    setDirection(1);
-    setActiveVideoIndex(0);
-    setActiveIndex((prev) => (prev + 1) % items.length);
-  };
-
-  const handlePrevVideo = () => {
-    const totalVideos = currentClient.videos.length;
-    setActiveVideoIndex((prev) => (prev - 1 + totalVideos) % totalVideos);
-  };
-
-  const handleNextVideo = () => {
-    const totalVideos = currentClient.videos.length;
-    setActiveVideoIndex((prev) => (prev + 1) % totalVideos);
-  };
-
-  const handleDragEnd = (event: any, info: any) => {
-    const swipeThreshold = 50;
-    const dx = info.offset.x;
-    const dy = info.offset.y;
-
-    if (Math.abs(dx) > Math.abs(dy)) {
-      if (dx < -swipeThreshold) {
-        handleNext();
-      } else if (dx > swipeThreshold) {
-        handlePrev();
-      }
-    } else if (isExpanded) {
-      if (dy < -swipeThreshold) {
-        handleNextVideo();
-      } else if (dy > swipeThreshold) {
-        handlePrevVideo();
-      }
-    }
-  };
-
-  const centerEmbedUrl = `https://www.youtube.com/embed/${currentVideoId}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${currentVideoId}&controls=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&showinfo=0&disablekb=1&fs=0&enablejsapi=1&origin=${typeof window !== 'undefined' ? encodeURIComponent(window.location.origin) : ''}`;
-
-  useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      if (typeof e.data !== 'string') return;
-      let data;
-      try {
-        data = JSON.parse(e.data);
-      } catch {
-        return;
-      }
-
-      if (data.event === 'onReady' && iframeRef.current?.contentWindow) {
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: 'playVideo', args: '' }),
-          '*'
-        );
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({
-            event: 'command',
-            func: isMuted ? 'mute' : 'unMute',
-            args: ''
-          }),
-          '*'
-        );
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [activeIndex, activeVideoIndex, isMuted, isExpanded]);
-
-  return (
-    <section className="py-14 md:py-20 bg-brand-bg text-brand-text relative border-b border-brand-border overflow-hidden" id="video-testimonials">
-      <div className="max-w-4xl mx-auto px-6 mb-8 text-center">
-        <span className="inline-flex items-center gap-1.5 text-[9px] font-mono font-bold tracking-[0.3em] text-brand-primary uppercase mb-1.5">
-          <Film className="h-3 w-3 text-brand-primary" /> {section_eyebrow}
-        </span>
-        <h2 className="text-3xl md:text-5xl font-serif italic font-normal tracking-tight text-brand-text">
-          Progress in <span className="text-brand-primary">Motion</span>
-        </h2>
-        <p className="text-brand-muted text-xs md:text-sm max-w-sm mx-auto mt-1.5 font-light">
-          Watch real training clips from my students as they build strength, master new skills, and progress through every stage of their calisthenics journey.
-        </p>
-      </div>
-
-      <div className="flex justify-center items-center px-6">
-        <motion.div
-          onClick={() => setIsExpanded(true)}
-          animate={{
-            boxShadow: [
-              '0 0 0 0px rgba(225, 29, 72, 0.4)',
-              '0 0 0 12px rgba(225, 29, 72, 0)',
-              '0 0 0 0px rgba(225, 29, 72, 0)'
-            ],
-            scale: [1, 1.015, 1]
-          }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="relative w-full max-w-[280px] md:max-w-[340px] aspect-[9/16] bg-black border-2 border-brand-primary cursor-pointer overflow-hidden shadow-2xl flex items-center justify-center group"
-        >
-          <img
-            src={`https://img.youtube.com/vi/${currentClient.videos[0]}/hqdefault.jpg`}
-            alt={currentClient.athlete}
-            className="w-full h-full object-cover opacity-80 filter brightness-75 transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
-
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-2">
-            <motion.div
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-              className="h-14 w-14 rounded-full bg-brand-primary border border-white/20 flex items-center justify-center text-white shadow-xl"
-            >
-              <Play className="h-6 w-6 fill-white text-white ml-1" />
-            </motion.div>
-            <span className="text-[9px] font-mono tracking-[0.25em] text-white uppercase bg-black/60 px-3 py-1 border border-white/15">
-              TAP TO REEL
-            </span>
-          </div>
-
-          <div className="absolute bottom-4 left-4 z-10">
-            <h4 className="text-xs font-mono font-bold text-white tracking-widest uppercase">
-              {currentClient.athlete}
-            </h4>
-            <p className="text-[8px] font-mono text-brand-primary uppercase font-bold tracking-wider">
-              {currentClient.duration}
-            </p>
-          </div>
-        </motion.div>
-      </div>
-
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, y: '100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '100%' }}
-            transition={{ type: 'spring', damping: 28, stiffness: 260 }}
-            className="fixed inset-0 z-[100] bg-black text-white flex flex-col h-full w-full overflow-hidden select-none"
-          >
-            <div className="relative h-[72vh] w-full bg-black flex items-center justify-center overflow-hidden">
-              <iframe
-                key={`${activeIndex}-${activeVideoIndex}-${isMuted ? 'm' : 'u'}`}
-                ref={iframeRef}
-                src={centerEmbedUrl}
-                title={`${currentClient.athlete} progression`}
-                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                className="w-full h-full object-cover"
-                style={{ border: 'none' }}
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
-
-              <motion.div
-                drag
-                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                dragElastic={0.2}
-                onDragEnd={handleDragEnd}
-                className="absolute inset-0 z-30 cursor-grab active:cursor-grabbing bg-transparent"
-              />
-
-              <button
-                onClick={() => setIsExpanded(false)}
-                className="absolute top-4 right-4 z-50 text-white bg-black/50 border border-white/20 p-2 rounded-full hover:bg-black/80 transition-colors cursor-pointer"
-                title="Close testimonial player"
-              >
-                <X className="h-5 w-5" />
-              </button>
-
-              {currentClient.videos.length > 1 && (
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-2.5 bg-black/40 border border-white/10 p-2 rounded-full">
-                  <button onClick={handlePrevVideo} className="text-white hover:text-brand-primary">
-                    <ChevronUp className="h-4 w-4" />
-                  </button>
-                  {currentClient.videos.map((_, vidx) => (
-                    <div
-                      key={vidx}
-                      className={`h-2 rounded-full transition-all duration-300 ${vidx === activeVideoIndex ? 'w-2 bg-brand-primary' : 'w-1.5 bg-zinc-600'}`}
-                    />
-                  ))}
-                  <button onClick={handleNextVideo} className="text-white hover:text-brand-primary">
-                    <ChevronDown className="h-4 w-4" />
-                  </button>
-                </div>
-              )}
-
-              <div className="absolute bottom-4 left-4 z-40 bg-black/60 border border-white/10 px-3 py-1.5 font-mono text-[8px] uppercase tracking-widest text-zinc-300">
-                Swipe ↕ videos • Swipe ↔ clients
-              </div>
-
-              <div className="absolute bottom-4 right-4 z-40">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsMuted(!isMuted);
-                  }}
-                  className="h-10 w-10 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white transition-colors cursor-pointer"
-                >
-                  {isMuted ? (
-                    <VolumeX className="h-4.5 w-4.5 text-rose-400" />
-                  ) : (
-                    <Volume2 className="h-4.5 w-4.5 text-emerald-400" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div className="h-[28vh] w-full bg-[#0D0D0D] border-t border-white/10 p-5 flex flex-col justify-center text-white relative z-40">
-              <div className="flex items-center gap-1 mb-2">
-                {items.map((_, cidx) => (
-                  <div
-                    key={cidx}
-                    className={`h-1 rounded-none transition-all duration-300 ${cidx === activeIndex ? 'w-4 bg-brand-primary' : 'w-1 bg-zinc-600'}`}
-                  />
-                ))}
-                <span className="text-[8px] font-mono text-brand-primary uppercase font-bold tracking-wider ml-2">
-                  Client {activeIndex + 1} of {items.length}
-                </span>
-              </div>
-
-              <span className="text-[8px] font-mono text-zinc-400 tracking-[0.2em] uppercase block mb-1">
-                {currentClient.duration} • <span className="text-brand-primary font-bold">VERIFIED PROTOCOL</span>
-              </span>
-
-              <h3 className="text-lg font-serif italic text-white font-normal leading-tight">
-                {currentClient.athlete}
-              </h3>
-
-              <p className="text-[9px] font-mono tracking-wider text-brand-primary uppercase font-bold mb-1">
-                {currentClient.skill}
-              </p>
-
-              <p className="text-zinc-400 text-[11px] leading-relaxed font-light overflow-y-auto max-h-[60px] pr-2">
-                {currentClient.desc}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div className="max-w-md mx-auto px-6 text-center mt-6">
-        <div className="flex items-center justify-center gap-1.5 mb-1 text-[9px] font-mono text-brand-muted uppercase font-bold">
-          <span>{currentClient.duration}</span>
-          <span>•</span>
-          <span className="inline-flex items-center gap-0.5 text-brand-primary">
-            <ShieldCheck className="h-2.5 w-2.5 text-brand-primary" /> VERIFIED ATHLETE
-          </span>
-        </div>
-
-        <h3 className="text-base sm:text-lg font-serif italic text-brand-text font-normal leading-snug">
-          {currentClient.athlete}
-        </h3>
-
-        <p className="text-[10px] font-mono tracking-wider text-brand-primary uppercase font-bold mb-1">
-          {currentClient.skill}
-        </p>
-
-        <p className="text-brand-muted text-xs sm:text-sm leading-relaxed font-light max-w-sm mx-auto">
-          {currentClient.desc}
-        </p>
-
-        <div className="flex items-center justify-center gap-1.5 mt-4">
-          {items.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setDirection(index > activeIndex ? 1 : -1);
-                setActiveIndex(index);
-                setActiveVideoIndex(0);
-              }}
-              className={`h-0.5 transition-all duration-300 rounded-none cursor-pointer ${index === activeIndex ? 'w-5 bg-brand-primary' : 'w-1.5 bg-brand-border'}`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -1508,7 +1189,7 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
         {/* Section Title */}
         <div className="max-w-3xl mb-16">
           <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-brand-primary uppercase block mb-3">
-            PROGRAM ARCHITECTURE
+            PROGRAM EXPERIENCE
           </span>
           <h2 className="text-4xl md:text-6xl font-serif italic font-normal tracking-tight text-brand-text mb-4 leading-tight">
             {content.section_title}
@@ -1534,14 +1215,14 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
               <div className="absolute inset-0 bg-gradient-to-t from-brand-card/90 via-transparent to-transparent" />
               
               {/* Overlaid stats box */}
-              <div className="absolute bottom-6 left-6 right-6 bg-brand-card border border-brand-border p-5 rounded-none backdrop-blur-md">
+              {/* <div className="absolute bottom-6 left-6 right-6 bg-brand-card border border-brand-border p-5 rounded-none backdrop-blur-md">
                 <h4 className="text-xs font-mono font-bold text-brand-primary mb-2 tracking-[0.1em] uppercase">
                   ⚡ All-Inclusive Mobile Access
                 </h4>
                 <p className="text-xs text-brand-muted leading-relaxed font-light">
                   Includes full HD video exercise catalogs, active form-check queues, customized progress trackers, and real-time messaging directly with Coach Surya.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -1577,7 +1258,7 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
             </div>
 
             {/* Direct CTA under features */}
-            <div className="p-6 md:p-8 bg-brand-card rounded-none border border-brand-border mt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            {/* <div className="p-6 md:p-8 bg-brand-card rounded-none border border-brand-border mt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div>
                 <h4 className="text-lg font-serif italic font-normal text-brand-text tracking-tight mb-1">
                   Ready to test your limits?
@@ -1592,7 +1273,7 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
               >
                 Apply for Cohort
               </button>
-            </div>
+            </div> */}
           </div>
 
         </div>
@@ -1600,6 +1281,437 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
     </section>
   );
 }
+</file>
+
+<file path="src/components/VideoTestimonials.tsx">
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+'use client';
+
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Volume2, VolumeX, Film, Play, TrendingUp, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { VideoTestimonialsContent } from '../types';
+
+interface VideoTestimonialsProps {
+  content: VideoTestimonialsContent;
+}
+
+const AUTO_SCROLL_SPEED = 0.55;
+
+export default function VideoTestimonials({ content }: VideoTestimonialsProps) {
+  const { items, section_eyebrow, section_title, section_subtitle } = content;
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  const trackRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+
+  const isDraggingRef = useRef(false);
+  const pointerStartXRef = useRef(0);
+  const dragStartTranslateRef = useRef(0);
+  const currentXRef = useRef(0);
+  const targetXRef = useRef(0);
+  const setWidthRef = useRef(0);
+  const cardAdvanceRef = useRef(260);
+  const initializedRef = useRef(false);
+  const rafRef = useRef<number | null>(null);
+  const pointerDownPositionRef = useRef<{ x: number; y: number } | null>(null);
+  const clickThreshold = 8;
+
+  const loopedItems = items.length > 0 ? [...items, ...items, ...items] : [];
+
+  const applyTransform = useCallback((x: number) => {
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translate3d(${x}px, 0, 0)`;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (items.length === 0) return;
+
+    const measure = () => {
+      if (!trackRef.current) return;
+      const width = trackRef.current.scrollWidth / 3;
+      setWidthRef.current = width;
+      cardAdvanceRef.current = width / items.length;
+
+      if (!initializedRef.current && width > 0) {
+        initializedRef.current = true;
+        currentXRef.current = -width;
+        targetXRef.current = -width;
+        applyTransform(-width);
+      }
+    };
+
+    measure();
+    const resizeObserver = new ResizeObserver(measure);
+    if (trackRef.current) resizeObserver.observe(trackRef.current);
+    window.addEventListener('resize', measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [items.length, applyTransform]);
+
+  useEffect(() => {
+    if (items.length === 0) return;
+
+    const tick = () => {
+      const width = setWidthRef.current;
+      if (width > 0) {
+        if (isDraggingRef.current) {
+          currentXRef.current = targetXRef.current;
+        } else {
+          const diff = targetXRef.current - currentXRef.current;
+          if (Math.abs(diff) > 0.05) {
+            currentXRef.current += diff * 0.12;
+          } else {
+            currentXRef.current -= AUTO_SCROLL_SPEED;
+            targetXRef.current = currentXRef.current;
+          }
+        }
+
+        if (currentXRef.current <= -2 * width) {
+          currentXRef.current += width;
+          targetXRef.current += width;
+          dragStartTranslateRef.current += width;
+        } else if (currentXRef.current > 0) {
+          currentXRef.current -= width;
+          targetXRef.current -= width;
+          dragStartTranslateRef.current -= width;
+        }
+
+        applyTransform(currentXRef.current);
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [items.length, applyTransform]);
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    isDraggingRef.current = true;
+    setIsDragging(true);
+    pointerStartXRef.current = e.clientX;
+    dragStartTranslateRef.current = currentXRef.current;
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    const delta = (e.clientX - pointerStartXRef.current) * 1.4;
+    targetXRef.current = dragStartTranslateRef.current + delta;
+  };
+
+  const endDrag = () => {
+    isDraggingRef.current = false;
+    setIsDragging(false);
+    pointerDownPositionRef.current = null;
+  };
+
+  const handleCardPointerDown = (index: number) => (e: React.PointerEvent<HTMLDivElement>) => {
+    pointerDownPositionRef.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handleCardPointerUp = (index: number) => (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!pointerDownPositionRef.current) return;
+
+    const dx = e.clientX - pointerDownPositionRef.current.x;
+    const dy = e.clientY - pointerDownPositionRef.current.y;
+    const distance = Math.hypot(dx, dy);
+    pointerDownPositionRef.current = null;
+
+    if (distance > clickThreshold) return;
+
+    setActiveIndex(index);
+    setIsMuted(false);
+    setIsExpanded(true);
+  };
+
+  const nudgeSlide = (direction: 'prev' | 'next') => {
+    const advance = cardAdvanceRef.current || 260;
+    targetXRef.current += direction === 'prev' ? advance : -advance;
+  };
+
+  const currentClient = items[activeIndex];
+  const currentVideoId = currentClient.videoId;
+
+  const centerEmbedUrl = `https://www.youtube.com/embed/${currentVideoId}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${currentVideoId}&controls=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&showinfo=0&disablekb=1&fs=0&enablejsapi=1&origin=${typeof window !== 'undefined' ? encodeURIComponent(window.location.origin) : ''}`;
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (typeof e.data !== 'string') return;
+      let data;
+      try {
+        data = JSON.parse(e.data);
+      } catch {
+        return;
+      }
+
+      if (data.event === 'onReady' && iframeRef.current?.contentWindow) {
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'playVideo', args: '' }),
+          '*'
+        );
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: isMuted ? 'mute' : 'unMute', args: '' }),
+          '*'
+        );
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [currentVideoId, isMuted]);
+
+  useEffect(() => {
+    if (!isExpanded) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsExpanded(false);
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isExpanded]);
+
+  return (
+    <section className="py-14 md:py-20 bg-brand-bg text-brand-text relative border-b border-brand-border overflow-hidden" id="video-testimonials">
+      <div className="max-w-4xl mx-auto px-6 mb-8 text-center">
+        <span className="inline-flex items-center gap-1.5 text-[9px] font-mono font-bold tracking-[0.3em] text-brand-primary uppercase mb-1.5">
+          <Film className="h-3 w-3 text-brand-primary" /> {section_eyebrow}
+        </span>
+        <h2 className="text-3xl md:text-5xl font-serif italic font-normal tracking-tight text-brand-text leading-tight">
+          {section_title}
+        </h2>
+        <p className="text-brand-muted text-xs md:text-sm max-w-sm mx-auto mt-4 font-light">
+          {section_subtitle}
+        </p>
+      </div>
+
+      <div className="relative w-full overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-28 bg-gradient-to-r from-brand-bg via-brand-bg/80 to-transparent z-20 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-28 bg-gradient-to-l from-brand-bg via-brand-bg/80 to-transparent z-20 pointer-events-none" />
+
+        <div
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={endDrag}
+          onPointerLeave={endDrag}
+          onPointerCancel={endDrag}
+          className={`relative overflow-hidden px-6 md:px-12 py-4 touch-pan-y ${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
+          style={{ touchAction: 'pan-y' }}
+        >
+          <div ref={trackRef} className="flex gap-4 md:gap-6 will-change-transform">
+            {loopedItems.map((item, idx) => {
+              const originalIndex = idx % items.length;
+              return (
+                <button
+                  key={`${item.videoId}-${idx}`}
+                  type="button"
+                  onPointerDown={handleCardPointerDown(originalIndex)}
+                  onPointerUp={handleCardPointerUp(originalIndex)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveIndex(originalIndex);
+                      setIsMuted(false);
+                      setIsExpanded(true);
+                    }
+                  }}
+                  className="shrink-0 w-[180px] xs:w-[200px] sm:w-[220px] md:w-[250px] lg:w-[280px] aspect-[9/16] rounded-none overflow-hidden border border-brand-border bg-brand-card shadow-xl relative text-left"
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${item.videoId}/hqdefault.jpg`}
+                    alt={item.athlete}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    draggable={false}
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
+
+                  <div className="absolute top-3 left-3 z-10 rounded-none bg-black/70 border border-white/15 px-2 py-1 text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-white">
+                    {item.badge}
+                  </div>
+                  <div className="absolute top-3 right-3 z-10 rounded-none bg-black/70 border border-white/15 px-2 py-1 text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-white">
+                    {item.videoDuration}
+                  </div>
+
+                  <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                    <motion.div
+                      animate={{ scale: [1, 1.08, 1] }}
+                      transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                      className="h-16 w-16 rounded-full bg-brand-primary flex items-center justify-center shadow-xl border border-white/20"
+                    >
+                      <Play className="h-6 w-6 text-white" />
+                    </motion.div>
+                  </div>
+
+                  <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black via-black/80 to-transparent px-4 pb-4 pt-24">
+                    <h3 className="text-lg font-bold text-white leading-tight">{item.athlete}</h3>
+                    <p className="mt-2 text-[10px] uppercase tracking-[0.26em] text-brand-primary font-bold">
+                      {item.weekLabel}
+                    </p>
+                    <div className="mt-3 flex items-start gap-3">
+                      <div className="h-9 w-9 rounded-full bg-[#111] border border-white/10 flex items-center justify-center text-brand-primary">
+                        <TrendingUp className="h-4 w-4" />
+                      </div>
+                      <div className="space-y-1 text-white/90 text-[11px] leading-snug">
+                        <p className="font-semibold text-white">{item.statHeadline}</p>
+                        <p className="text-zinc-300">{item.statSubtext}</p>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => nudgeSlide('prev')}
+          className="absolute left-3 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/15 border border-white/10 p-2 text-white shadow-xl hover:bg-white/20 transition-colors"
+          aria-label="Previous testimonials"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => nudgeSlide('next')}
+          className="absolute right-3 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/15 border border-white/10 p-2 text-white shadow-xl hover:bg-white/20 transition-colors"
+          aria-label="Next testimonials"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-6 mt-8">
+        <div className="flex items-center justify-center gap-2">
+          {items.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${index === activeIndex ? 'w-6 bg-brand-primary' : 'w-2 bg-brand-border'}`}
+              aria-label={`Show testimonial ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.24 }}
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+            onPointerDown={() => setIsExpanded(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 24, scale: 0.98 }}
+              transition={{ type: 'spring', damping: 24, stiffness: 220 }}
+              className="relative z-10 w-full max-w-[420px]"
+              onPointerDown={(event) => event.stopPropagation()}
+            >
+              <div className="relative overflow-hidden rounded-none border border-white/10 bg-black shadow-2xl">
+                <iframe
+                  key={`${activeIndex}-${isMuted ? 'm' : 'u'}`}
+                  ref={iframeRef}
+                  src={`https://www.youtube.com/embed/${currentVideoId}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? encodeURIComponent(window.location.origin) : ''}`}
+                  title={`${currentClient.athlete} progression`}
+                  allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  className="w-full aspect-[9/16] bg-black"
+                  style={{ border: 'none' }}
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+
+                <button
+                  onClick={() => setIsExpanded(false)}
+                  className="absolute top-3 right-3 z-20 text-white bg-black/60 border border-white/15 p-2 rounded-full hover:bg-black/80 transition-colors"
+                  title="Close video popup"
+                  aria-label="Close video popup"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsMuted((prev) => !prev);
+                  }}
+                  className="absolute bottom-3 right-3 z-20 h-10 w-10 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white transition-colors hover:bg-black/80"
+                  aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                >
+                  {isMuted ? (
+                    <VolumeX className="h-4.5 w-4.5 text-rose-400" />
+                  ) : (
+                    <Volume2 className="h-4.5 w-4.5 text-emerald-400" />
+                  )}
+                </button>
+              </div>
+
+              <div className="mt-4 rounded-none border border-white/10 bg-[#0D0D0D] p-5 text-white">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-brand-primary font-bold mb-2">
+                  {currentClient.weekLabel}
+                </p>
+                <h3 className="text-2xl font-serif italic font-normal leading-tight">
+                  {currentClient.athlete}
+                </h3>
+                <div className="mt-4 flex items-start gap-3">
+                  <div className="h-11 w-11 rounded-full bg-[#111] border border-white/10 flex items-center justify-center text-brand-primary">
+                    <TrendingUp className="h-5 w-5" />
+                  </div>
+                  <div className="space-y-1 text-sm leading-snug text-zinc-300">
+                    <p className="font-semibold text-white">{currentClient.statHeadline}</p>
+                    <p>{currentClient.statSubtext}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surya Calisthenics — Elite Bodyweight Mastery Coaching</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
 </file>
 
 <file path="src/components/Transformations.tsx">
@@ -2216,21 +2328,6 @@ body {
 }
 </file>
 
-<file path="index.html">
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Surya Calisthenics — Elite Bodyweight Mastery Coaching</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-</file>
-
 <file path="public/content.txt">
 [HERO]
 headline = Reclaim Your True Strength
@@ -2286,32 +2383,33 @@ youtube_id = 78zo1AeWSc8
 video_title = Calisthenics Masterclass & Progression Secrets
 
 [REVIEWS]
-review_1 = "This program is incredible! I went from struggling with basic pushups to mastering the handstand pushup. The mobile layout makes it so easy to follow in the park." - Marcus T.
-review_2 = "Surya's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control." - Sarah K.
-review_3 = "Absolutely mind-blowing results. I've gained 5kg of solid muscle and feel stronger and lighter than ever. The support is elite." - Alex R.
-review_4 = "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Surya right there on the bars with me." - Liam P.
-review_5 = "Most fitness programs are boring. Calisthenics builds skill, coordination, and a highly aesthetic physique. Best coaching out there." - Elena G.
+review_1 = "Able to gain some shape in shoulder and chest, I realized an increase in hand power and can do 1 to 2 pullups now; before starting I could not do even one. I also saw strength gains in my thighs, though my core still needs work. Overall, visible improvement in some parts; I need to stay consistent 5 days a week to see more positives." - Basker (42yr old)
+review_2 = "It's been 3 months of a great journey into the calisthenics world with you. I was skeptical about online coaching at first, but now I feel very happy with the decision. You analyzed my workouts and tailored every exercise, making me comfortable and confident. Thank you for pushing my limits and helping me unlock new skills." - Sidharth (32yr old)
+review_3 = "These two months with coach Surya have been amazing. My endurance, flexibility, and strength improved a lot, and I learned the correct form for every exercise plus calisthenics basics like frog pose. This journey is already amazing and there is a long way to go." - Yasin (30yr old)
+review_4 = "Intha two months ennaku nalla challenge ah irunthuchi. Everyday pain feel panna atha enjoy panna, every midnight ennoda kai semma pain tharum but I will not stop. Naa strong ah irukken nu feel pandren. I can feel my body shape changing and my blood sugar is under control. Totally I feel so happy." - Pooja (19yr old)
+review_5 = "Overall, nice experience for the first 3 months bro. I saw better changes than a year at gym without taking protein supplements. Weekly workout variation made it more interesting and motivating. Calisthenics became a stress buster while I handle study pressure, and I am renewing for another 3 months." - Kumar (28yr old)
+review_6 = "After just 12 classes, I cannot thank Surya enough for the incredible change I’ve experienced. I was unsure of my strength and flexibility at first, but his expertise, patience, and motivation changed my perspective on fitness. Moves that once seemed impossible, like pull-ups, now feel within reach." - Anonymous (35yr old)
 
 [PROGRAM]
-section_title = The Bodyweight Athlete Protocol
-section_subtitle = A comprehensive, mobile-first training environment engineered for rapid skill acquisition and raw strength.
+section_title = Inside the Coaching Experience
+section_subtitle = Everything you need to build strength, master advanced calisthenics skills, and stay consistent—all in one personalized coaching system designed around your goals.
 supporting_image = https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop
 
 point_1_icon = Target
-point_1_title = Skill-Based Progressions
-point_1_text = Master high-level skills like the Handstand, Muscle-Up, and Planche with personalized, joint-safe progressive stages.
+point_1_title = PERSONALIZED SKILL PROGRESSIONS
+point_1_text = Master pull-ups, muscle-ups, handstands, front lever, and planche through structured progressions tailored to your level.
 
 point_2_icon = Flame
-point_2_title = Hypertrophy & Fat Loss
-point_2_text = Build a dense, functional, and highly defined athletic physique using targeted bodyweight resistance protocols.
+point_2_title = STRENGTH & PHYSIQUE DEVELOPMENT
+point_2_text = Build lean muscle, increase [obscured] strength, and develop [obscured] athletic physique with progressive bodyweight training.
 
 point_3_icon = Shield
-point_3_title = Joint Bulletproofing
-point_3_text = Strengthen your wrists, elbows, and shoulders with expert mobility and active flexibility routines to prevent injury.
+point_3_title = MOBILITY & INJURY PREVENTION
+point_3_text = Improve flexibility, joint health, and movement quality with mobility routines that help you train consistently and reduce injury risk.
 
 point_4_icon = Zap
-point_4_title = Mobile Training Hub
-point_4_text = Access your daily workouts, HD demonstration videos, and submit direct video form checks, optimized for the outdoor park.
+point_4_title = YOUR COACHING DASHBOARD
+point_4_text = Access workouts, demonstration videos, progress tracking, form reviews, and direct coach support—[obscured]
 
 [FOOTER]
 instagram_url = https://instagram.com/calisthenicscoach
@@ -2324,32 +2422,43 @@ youtube_cta_text = Subscribe on YouTube
 
 [VIDEO_TESTIMONIALS]
 section_eyebrow = Clients Progress Library
-section_title = Progress in 
+section_title = Progress in Motion
 section_subtitle = Drag or swipe the video horizontally to slide through progress clips.
-; Remove every client_* entry below to hide the section entirely.
 client_1_name = Marcus T.
-client_1_skill = Front Lever & Muscle-Up Mastery
-client_1_duration = 12 Weeks Protocol
-client_1_desc = Demonstrating solid 10-second front levers and explosive bar muscle-ups with perfect mechanics.
-client_1_videos = 78zo1AeWSc8, tpEe10R1f0Y, p9gYwJ8I9uY
+client_1_badge = MUSCLE-UP
+client_1_video_id = 78zo1AeWSc8
+client_1_video_duration = 2:14
+client_1_week_label = WEEK 12 • MUSCLE-UP PROGRESS
+client_1_stat_headline = From 0 to 3 Strict Muscle-Ups
+client_1_stat_subtext = 12 Weeks Transformation
+client_1_desc = Demonstrating solid front lever control and explosive muscle-up strength after consistent progressions.
 
 client_2_name = Sarah K.
-client_2_skill = Freestanding Handstand Balance
-client_2_duration = 16 Weeks Protocol
-client_2_desc = Showcasing pristine shoulder stability and body alignment during an active freestanding hold.
-client_2_videos = p9gYwJ8I9uY, EGMG_7m_xH4
+client_2_badge = HANDSTAND
+client_2_video_id = p9gYwJ8I9uY
+client_2_video_duration = 1:58
+client_2_week_label = WEEK 16 • HANDSTAND BREAKTHROUGH
+client_2_stat_headline = Built shoulder stability and balance
+client_2_stat_subtext = 16 Weeks Progress
+client_2_desc = Achieving clean freestanding holds and tight body alignment through targeted shoulder work.
 
 client_3_name = Alex R.
-client_3_skill = Gymnastic Ring False-Grip Flow
-client_3_duration = 24 Weeks Protocol
-client_3_desc = Seamless flow through ring muscle-ups, clean static support holds, and stable shoulder stands.
-client_3_videos = EGMG_7m_xH4, j71XgK-9Kco
+client_3_badge = STRENGTH
+client_3_video_id = EGMG_7m_xH4
+client_3_video_duration = 2:05
+client_3_week_label = WEEK 24 • STRENGTH EVOLUTION
+client_3_stat_headline = Clean gymnastic ring transitions
+client_3_stat_subtext = 24 Weeks Mastery
+client_3_desc = Executing fluid ring muscle-up flows and stable support holds after systematic strength buildup.
 
 client_4_name = David L.
-client_4_skill = Overhead Mobility Restoration
-client_4_duration = 8 Weeks Protocol
-client_4_desc = Showing pain-free overhead extensions and fluid press movements after resolving severe impingement.
-client_4_videos = j71XgK-9Kco, 78zo1AeWSc8
+client_4_badge = MOBILITY
+client_4_video_id = j71XgK-9Kco
+client_4_video_duration = 1:52
+client_4_week_label = WEEK 8 • MOBILITY UPGRADE
+client_4_stat_headline = Pain-free overhead range
+client_4_stat_subtext = 8 Weeks Reset
+client_4_desc = Restoring overhead movement quality and smooth press patterns through mobility-focused training.
 
 [FAQ]
 section_eyebrow = Common Questions
@@ -2581,7 +2690,10 @@ import {
   MessageCircle,
   Instagram,
   Youtube,
+  Menu,
 } from 'lucide-react';
+
+const heroImage = new URL('../images/hero-image.png', import.meta.url).href;
 
 // lucide-react has no TikTok glyph — minimal inline icon so the social row matches the reference exactly.
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -2641,7 +2753,7 @@ const DEFAULT_HERO: HeroContentV2 = {
   subheadline: 'Personalized coaching. Real results. Stronger every day.',
   paragraph:
     'I help you build real strength, unlock elite skills, and transform your body through structured calisthenics training, nutrition guidance, and 1-on-1 support tailored to your goals.',
-  image: '/images/desktop-hero.png',
+  image: heroImage,
   primaryCtaText: 'Start Your Transformation',
   secondaryCtaText: 'View Client Results',
   stats: [
@@ -2696,61 +2808,78 @@ export default function Hero({ content, onPrimaryCtaClick, onSecondaryCtaClick }
 
   return (
     <section className="relative w-full bg-white overflow-hidden" id="hero">
-      {/* Logo mark — top right. Sized down on mobile so it doesn't eat into the
-          already-tight split-screen layout, and the text column below gets a
-          matching top-padding so the headline never sits under it. */}
-      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-8 z-30 text-right bg-white/85 backdrop-blur-sm px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow-sm">
-        <span className="font-script block text-lg sm:text-xl md:text-2xl text-brand-primary leading-none">
-          {c.logoScript}
-        </span>
-        <span className="block text-[7px] sm:text-[8px] md:text-[10px] font-extrabold tracking-[0.25em] sm:tracking-[0.35em] text-brand-text mt-0.5 sm:mt-1">
-          {c.logoBold}
-        </span>
-      </div>
 
-      {/*
-        FIX: This row is now `flex flex-row` from the very smallest screen
-        up (image left, content right), instead of only becoming a row at
-        `lg`. Below `lg` it switches from `grid` to plain `flex` with
-        percentage widths on the two children; at `lg` it swaps back to the
-        original 12-col grid so desktop is untouched.
-      */}
-      <div className="max-w-[1600px] mx-auto flex flex-row lg:grid lg:grid-cols-12 lg:items-stretch">
-        {/* LEFT — image + giant background word */}
-        {/*
-          Mobile/tablet: fixed pixel height (h-[...]) + percentage width,
-          so the row itself is never taller than the viewport and the image
-          reliably fills its column via object-cover/object-bottom.
-          Desktop (lg+): reverts to the original min-h-based grid column.
-        */}
-        <div className="relative w-[40%] sm:w-[38%] lg:w-auto lg:col-span-5 h-[440px] sm:h-[480px] md:h-[520px] lg:h-auto lg:min-h-[560px] overflow-hidden bg-neutral-50 shrink-0">
-          <span
-            aria-hidden="true"
-            className="hidden lg:block absolute -left-16 top-1/2 -translate-y-1/2 -rotate-90 origin-center font-display text-[8rem] xl:text-[10rem] text-neutral-100 tracking-tight select-none whitespace-nowrap"
+      {/* ============================================================ */}
+      {/* MOBILE / TABLET LAYOUT (below lg) — matches the reference    */}
+      {/* mockup: top nav bar, then image+stats row, then full-width   */}
+      {/* headline/copy/CTAs stacked underneath.                       */}
+      {/* ============================================================ */}
+      <div className="lg:hidden">
+
+        {/* Top nav bar: logo left, hamburger right */}
+        <div className="flex items-center justify-between px-5 pt-5 pb-1">
+          <div className="text-left leading-none">
+            <span className="font-script block text-xl sm:text-2xl text-brand-primary leading-none">
+              {c.logoScript}
+            </span>
+            <span className="block text-[9px] sm:text-[10px] font-extrabold tracking-[0.25em] text-brand-text mt-1">
+              {c.logoBold}
+            </span>
+          </div>
+          {/* Placeholder trigger only — wire this up to a mobile nav drawer if/when one exists */}
+          {/* <button
+            type="button"
+            aria-label="Open menu"
+            className="p-2 -mr-2 text-brand-text cursor-pointer"
           >
-            {c.bgWord}
-          </span>
-          <img
-            src={c.image}
-            alt="Athlete performing an explosive calisthenics bar exercise"
-            referrerPolicy="no-referrer"
-            className="absolute inset-0 z-10 w-full h-full object-cover object-bottom"
-          />
+            <Menu className="h-6 w-6" strokeWidth={2} />
+          </button> */}
         </div>
 
-        {/* RIGHT — copy */}
-        {/*
-          Mobile: tight padding, pt-16 clears the absolute logo box above.
-          The long bio paragraph is hidden below `sm` (it's the least
-          essential line) so the headline + stats + CTAs all fit in view
-          without scrolling on a phone.
-        */}
-        <div className="flex-1 min-w-0 lg:flex-none lg:col-span-7 flex flex-col justify-center px-3 pt-16 pb-5 sm:px-5 sm:pt-16 sm:pb-6 md:px-10 md:py-8 lg:px-16 lg:py-6">
+        {/* Image (left, bleeds to screen edge) + vertically-stacked stats (right) */}
+        <div className="flex flex-row items-stretch mt-3">
+          <div className="w-[62%] relative h-[380px] sm:h-[440px] overflow-hidden shrink-0 bg-neutral-50">
+            <img
+              src={c.image}
+              alt="Athlete performing an explosive calisthenics bar exercise"
+              referrerPolicy="no-referrer"
+              className="relative w-full h-full object-cover object-center"
+            />
+          </div>
+
+          <div className="flex-1 flex flex-col justify-center gap-4 sm:gap-5 pl-4 pr-5 min-w-0">
+            {c.stats.map((stat, idx) => {
+              const Icon = StatIconMap[stat.icon];
+              const isLast = idx === c.stats.length - 1;
+              return (
+                <div
+                  key={idx}
+                  className={`flex items-start gap-2.5 ${
+                    isLast ? '' : 'pb-4 sm:pb-5 border-b border-brand-border'
+                  }`}
+                >
+                  <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-brand-primary shrink-0 mt-0.5" strokeWidth={1.6} />
+                  <div className="leading-tight">
+                    <div className="text-base sm:text-lg font-extrabold text-brand-text leading-none">
+                      {stat.value}
+                    </div>
+                    <div className="text-[11px] sm:text-xs text-brand-muted font-light leading-snug mt-1.5">
+                      {stat.label}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Headline + copy + CTAs — full width, below the image/stats row */}
+        <div className="px-5 pt-7 pb-7">
           <motion.h1
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-            className="font-display uppercase text-brand-text text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] lg:leading-[0.95] tracking-tight"
+            transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+            className="font-display uppercase text-brand-text text-4xl xs:text-5xl sm:text-6xl leading-[0.98] tracking-tight"
           >
             <span className="block">{c.headlineLine1}</span>
             <span className="block">
@@ -2758,85 +2887,165 @@ export default function Hero({ content, onPrimaryCtaClick, onSecondaryCtaClick }
             </span>
           </motion.h1>
 
-          <div className="h-1 w-10 sm:w-12 lg:w-14 bg-brand-primary mt-2 mb-2 lg:mt-4 lg:mb-4" />
+          <div className="h-1 w-12 bg-brand-primary mt-4 mb-4" />
 
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.22, ease: 'easeOut' }}
-            className="text-brand-muted font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-[9px] sm:text-[10px] md:text-sm mb-1.5 lg:mb-3"
+            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+            className="text-brand-muted font-bold uppercase tracking-[0.12em] text-xs sm:text-sm mb-3"
           >
             {c.subheadline}
           </motion.p>
 
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.32, ease: 'easeOut' }}
-            className="hidden sm:block text-brand-muted text-xs md:text-base leading-relaxed max-w-xl font-light mb-3 lg:mb-5"
+            transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
+            className="text-brand-muted text-sm leading-relaxed font-light mb-6"
           >
             {c.paragraph}
           </motion.p>
 
-          {/*
-            Stats: stays 2-col from mobile through tablet (4 across a
-            narrow content column was what caused the wrapping/cramping in
-            the screenshot) and only expands to 4-col once there's enough
-            room at `lg`.
-          */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.42, ease: 'easeOut' }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-y-2 gap-x-2 sm:gap-y-3 sm:gap-x-3 mb-3 lg:mb-5"
-          >
-            {c.stats.map((stat, idx) => {
-              const Icon = StatIconMap[stat.icon];
-              return (
-                <div key={idx} className="relative flex items-center gap-1.5 sm:gap-2">
-                  {idx > 0 && (
-                    <div className="hidden lg:block absolute -left-2 top-1/2 -translate-y-1/2 w-px h-8 bg-brand-border" />
-                  )}
-                  <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 lg:h-6 lg:w-6 text-brand-primary shrink-0" strokeWidth={1.75} />
-                  <div className="leading-tight">
-                    <div className="text-[10px] sm:text-xs md:text-sm font-extrabold text-brand-text whitespace-nowrap">
-                      {stat.value}
-                    </div>
-                    <div className="text-[7px] sm:text-[8px] md:text-[10px] text-brand-muted font-light">{stat.label}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </motion.div>
-
-          <div className="h-px w-full bg-brand-border mb-3 lg:mb-5" />
-
-          {/* CTAs — stacked/compact on mobile, side-by-side pill-ish buttons at lg */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.52, ease: 'easeOut' }}
-            className="flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-center lg:gap-4"
+            transition={{ duration: 0.6, delay: 0.36, ease: 'easeOut' }}
+            className="flex flex-col gap-3"
           >
             <button
               onClick={onPrimaryCtaClick}
-              className="inline-flex items-center justify-center gap-1.5 bg-brand-primary hover:bg-brand-secondary text-white font-bold text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider px-4 py-2.5 sm:px-5 sm:py-3 lg:px-7 lg:py-3.5 rounded-md lg:rounded-lg transition-all active:scale-95 cursor-pointer shadow-lg"
+              className="w-full inline-flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-secondary text-white font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-lg transition-all active:scale-95 cursor-pointer shadow-lg"
             >
               <span>{c.primaryCtaText}</span>
-              <ArrowRight className="h-3.5 w-3.5 lg:h-4 lg:w-4" />
+              <ArrowRight className="h-4 w-4" />
             </button>
             <button
               onClick={onSecondaryCtaClick}
-              className="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-neutral-50 text-brand-text font-bold text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider px-4 py-2.5 sm:px-5 sm:py-3 lg:px-7 lg:py-3.5 rounded-md lg:rounded-lg border-2 border-brand-text transition-all active:scale-95 cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-neutral-50 text-brand-text font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-lg border-2 border-brand-text transition-all active:scale-95 cursor-pointer"
             >
               <span>{c.secondaryCtaText}</span>
-              <ArrowRight className="h-3.5 w-3.5 lg:h-4 lg:w-4" />
+              <ArrowRight className="h-4 w-4" />
             </button>
           </motion.div>
         </div>
       </div>
 
-      {/* Dark features bar — unchanged, sits below the fold, scrolls into view */}
+      {/* ============================================================ */}
+      {/* DESKTOP LAYOUT (lg and up) — unchanged from the original      */}
+      {/* ============================================================ */}
+      <div className="hidden lg:block">
+        <div className="absolute top-6 right-8 z-30 text-right bg-white/85 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm">
+          <span className="font-script block text-2xl text-brand-primary leading-none">
+            {c.logoScript}
+          </span>
+          <span className="block text-[10px] font-extrabold tracking-[0.35em] text-brand-text mt-1">
+            {c.logoBold}
+          </span>
+        </div>
+
+        <div className="max-w-[1600px] mx-auto grid grid-cols-12 items-stretch">
+          <div className="relative col-span-5 h-auto min-h-[560px] overflow-hidden bg-neutral-50 pl-6">
+            <span
+              aria-hidden="true"
+              className="block absolute -left-16 top-1/2 -translate-y-1/2 -rotate-90 origin-center font-display text-[8rem] xl:text-[10rem] text-neutral-100 tracking-tight select-none whitespace-nowrap"
+            >
+              {c.bgWord}
+            </span>
+            <img
+              src={c.image}
+              alt="Athlete performing an explosive calisthenics bar exercise"
+              referrerPolicy="no-referrer"
+              className="relative w-full h-full object-cover object-center"
+            />
+          </div>
+
+          <div className="col-span-7 flex flex-col justify-center px-16 py-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+              className="font-display uppercase text-brand-text text-7xl leading-[0.95] tracking-tight"
+            >
+              <span className="block">{c.headlineLine1}</span>
+              <span className="block">
+                {c.headlineBlackWord} <span className="text-brand-primary">{c.headlineRedWord}</span>
+              </span>
+            </motion.h1>
+
+            <div className="h-1 w-14 bg-brand-primary mt-4 mb-4" />
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.22, ease: 'easeOut' }}
+              className="text-brand-muted font-bold uppercase tracking-[0.15em] text-sm mb-3"
+            >
+              {c.subheadline}
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.32, ease: 'easeOut' }}
+              className="text-brand-muted text-base leading-relaxed max-w-xl font-light mb-5"
+            >
+              {c.paragraph}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.42, ease: 'easeOut' }}
+              className="grid grid-cols-4 gap-y-4 gap-x-3 mb-5"
+            >
+              {c.stats.map((stat, idx) => {
+                const Icon = StatIconMap[stat.icon];
+                return (
+                  <div key={idx} className="relative flex items-center gap-2">
+                    {idx > 0 && (
+                      <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-px h-8 bg-brand-border" />
+                    )}
+                    <Icon className="h-6 w-6 text-brand-primary shrink-0" strokeWidth={1.75} />
+                    <div className="leading-tight">
+                      <div className="text-sm font-extrabold text-brand-text whitespace-nowrap">
+                        {stat.value}
+                      </div>
+                      <div className="text-[10px] text-brand-muted font-light">{stat.label}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </motion.div>
+
+            <div className="h-px w-full bg-brand-border mb-5" />
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.52, ease: 'easeOut' }}
+              className="flex items-center gap-4"
+            >
+              <button
+                onClick={onPrimaryCtaClick}
+                className="inline-flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-secondary text-white font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-lg transition-all active:scale-95 cursor-pointer shadow-lg"
+              >
+                <span>{c.primaryCtaText}</span>
+                <ArrowRight className="h-4 w-4" />
+              </button>
+              <button
+                onClick={onSecondaryCtaClick}
+                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-neutral-50 text-brand-text font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-lg border-2 border-brand-text transition-all active:scale-95 cursor-pointer"
+              >
+                <span>{c.secondaryCtaText}</span>
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Dark features bar — shared across breakpoints, unchanged */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -2877,7 +3086,7 @@ export default function Hero({ content, onPrimaryCtaClick, onSecondaryCtaClick }
                   return (
                     <a
                       key={idx}
-                      href={socialurl}
+                      href={social.url}
                       target="_blank"
                       rel="noreferrer"
                       aria-label={social.platform}
@@ -2923,7 +3132,8 @@ export default function VideoSection({ content }: VideoSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // The user's *intent*: do they want sound on, if the video is visible?
-  const [wantsSound, setWantsSound] = useState(false);
+  // Default to true so the video unmuted when the section scrolls into view.
+  const [wantsSound, setWantsSound] = useState(true);
   // Whether the video player is actually visible in the viewport right now.
   const [isInView, setIsInView] = useState(false);
 
@@ -3134,11 +3344,13 @@ export interface FooterContent {
 
 export interface VideoTestimonialItem {
   athlete: string;
-  skill: string;
-  duration: string;
+  badge: string;
+  videoDuration: string;
+  weekLabel: string;
+  statHeadline: string;
+  statSubtext: string;
   desc: string;
-  id: string;
-  videos: string[];
+  videoId: string;
 }
 
 export interface VideoTestimonialsContent {
@@ -3247,50 +3459,54 @@ export const DEFAULT_CONTENT: WebsiteContent = {
   },
   reviews: [
     {
-      text: "This program is incredible! I went from struggling with basic pushups to mastering the handstand pushup. The mobile layout makes it so easy to follow in the park.",
-      author: "Marcus T."
+      text: "Able to gain some shape in shoulder and chest, I realized an increase in hand power and can do 1 to 2 pullups now; before starting I could not do even one. I also saw strength gains in my thighs, though my core still needs work. Overall, visible improvement in some parts; I need to stay consistent 5 days a week to see more positives.",
+      author: "Basker (42yr old)"
     },
     {
-      text: "Surya's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control.",
-      author: "Sarah K."
+      text: "It's been 3 months of a great journey into the calisthenics world with you. I was skeptical about online coaching at first, but now I feel very happy with the decision. You analyzed my workouts and tailored every exercise, making me comfortable and confident. Thank you for pushing my limits and helping me unlock new skills.",
+      author: "Sidharth (32yr old)"
     },
     {
-      text: "Absolutely mind-blowing results. I've gained 5kg of solid muscle and feel stronger and lighter than ever. The support is elite.",
-      author: "Alex R."
+      text: "These two months with coach Surya have been amazing. My endurance, flexibility, and strength improved a lot, and I learned the correct form for every exercise plus calisthenics basics like frog pose. This journey is already amazing and there is a long way to go.",
+      author: "Yasin (30yr old)"
     },
     {
-      text: "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Surya right there on the bars with me.",
-      author: "Liam P."
+      text: "Intha two months ennaku nalla challenge ah irunthuchi. Everyday pain feel panna atha enjoy panna, every midnight ennoda kai semma pain tharum but I will not stop. Naa strong ah irukken nu feel pandren. I can feel my body shape changing and my blood sugar is under control. Totally I feel so happy.",
+      author: "Pooja (19yr old)"
     },
     {
-      text: "Most fitness programs are boring. Calisthenics builds skill, coordination, and a highly aesthetic physique. Best coaching out there.",
-      author: "Elena G."
+      text: "Overall, nice experience for the first 3 months bro. I saw better changes than a year at gym without taking protein supplements. Weekly workout variation made it more interesting and motivating. Calisthenics became a stress buster while I handle study pressure, and I am renewing for another 3 months.",
+      author: "Kumar (28yr old)"
+    },
+    {
+      text: "After just 12 classes, I cannot thank Surya enough for the incredible change I’ve experienced. I was unsure of my strength and flexibility at first, but his expertise, patience, and motivation changed my perspective on fitness. Moves that once seemed impossible, like pull-ups, now feel within reach.",
+      author: "Anonymous (35yr old)"
     }
   ],
   program: {
-    section_title: "The Bodyweight Athlete Protocol",
-    section_subtitle: "A comprehensive, mobile-first training environment engineered for rapid skill acquisition and raw strength.",
+    section_title: "Inside the Coaching Experience",
+    section_subtitle: "Everything you need to build strength, master advanced calisthenics skills, and stay consistent—all in one personalized coaching system designed around your goals.",
     supporting_image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop",
     points: [
       {
         icon: "Target",
-        title: "Skill-Based Progressions",
-        text: "Master high-level skills like the Handstand, Muscle-Up, and Planche with personalized, joint-safe progressive stages."
+        title: "PERSONALIZED SKILL PROGRESSIONS",
+        text: "Master pull-ups, muscle-ups, handstands, front lever, and planche through structured progressions tailored to your level."
       },
       {
         icon: "Flame",
-        title: "Hypertrophy & Fat Loss",
-        text: "Build a dense, functional, and highly defined athletic physique using targeted bodyweight resistance protocols."
+        title: "STRENGTH & PHYSIQUE DEVELOPMENT",
+        text: "Build lean muscle, increase [obscured] strength, and develop [obscured] athletic physique with progressive bodyweight training."
       },
       {
         icon: "Shield",
-        title: "Joint Bulletproofing",
-        text: "Strengthen your wrists, elbows, and shoulders with expert mobility and active flexibility routines to prevent injury."
+        title: "MOBILITY & INJURY PREVENTION",
+        text: "Improve flexibility, joint health, and movement quality with mobility routines that help you train consistently and reduce injury risk."
       },
       {
         icon: "Zap",
-        title: "Mobile Training Hub",
-        text: "Access your daily workouts, HD demonstration videos, and submit direct video form checks, optimized for the outdoor park."
+        title: "YOUR COACHING DASHBOARD",
+        text: "Access workouts, demonstration videos, progress tracking, form reviews, and direct coach support—[obscured]"
       }
     ]
   },
@@ -3304,41 +3520,49 @@ export const DEFAULT_CONTENT: WebsiteContent = {
     youtube_cta_text: "Subscribe on YouTube"
   },
   videoTestimonials: {
-    section_eyebrow: "Proofs & Progress",
-    section_title: "Athletes on the Bars",
+    section_eyebrow: "Clients Progress Library",
+    section_title: "Progress in Motion",
     section_subtitle: "Drag or swipe the video horizontally to slide through progress clips.",
     items: [
       {
         athlete: "Marcus T.",
-        skill: "Front Lever & Muscle-Up Mastery",
-        duration: "12 Weeks Protocol",
-        desc: "Demonstrating solid 10-second front levers and explosive bar muscle-ups with perfect mechanics.",
-        id: "78zo1AeWSc8",
-        videos: ["78zo1AeWSc8", "tpEe10R1f0Y", "p9gYwJ8I9uY"]
+        badge: "MUSCLE-UP",
+        videoDuration: "2:14",
+        weekLabel: "WEEK 12 • MUSCLE-UP PROGRESS",
+        statHeadline: "From 0 to 3 Strict Muscle-Ups",
+        statSubtext: "12 Weeks Transformation",
+        desc: "Demonstrating solid front lever control and explosive muscle-up strength after consistent progressions.",
+        videoId: "78zo1AeWSc8"
       },
       {
         athlete: "Sarah K.",
-        skill: "Freestanding Handstand Balance",
-        duration: "16 Weeks Protocol",
-        desc: "Showcasing pristine shoulder stability and body alignment during an active freestanding hold.",
-        id: "p9gYwJ8I9uY",
-        videos: ["p9gYwJ8I9uY", "EGMG_7m_xH4"]
+        badge: "HANDSTAND",
+        videoDuration: "1:58",
+        weekLabel: "WEEK 16 • HANDSTAND BREAKTHROUGH",
+        statHeadline: "Built shoulder stability and balance",
+        statSubtext: "16 Weeks Progress",
+        desc: "Achieving clean freestanding holds and tight body alignment through targeted shoulder work.",
+        videoId: "p9gYwJ8I9uY"
       },
       {
         athlete: "Alex R.",
-        skill: "Gymnastic Ring False-Grip Flow",
-        duration: "24 Weeks Protocol",
-        desc: "Seamless flow through ring muscle-ups, clean static support holds, and stable shoulder stands.",
-        id: "EGMG_7m_xH4",
-        videos: ["EGMG_7m_xH4", "j71XgK-9Kco"]
+        badge: "STRENGTH",
+        videoDuration: "2:05",
+        weekLabel: "WEEK 24 • STRENGTH EVOLUTION",
+        statHeadline: "Clean gymnastic ring transitions",
+        statSubtext: "24 Weeks Mastery",
+        desc: "Executing fluid ring muscle-up flows and stable support holds after systematic strength buildup.",
+        videoId: "EGMG_7m_xH4"
       },
       {
         athlete: "David L.",
-        skill: "Overhead Mobility Restoration",
-        duration: "8 Weeks Protocol",
-        desc: "Showing pain-free overhead extensions and fluid press movements after resolving severe impingement.",
-        id: "j71XgK-9Kco",
-        videos: ["j71XgK-9Kco", "78zo1AeWSc8"]
+        badge: "MOBILITY",
+        videoDuration: "1:52",
+        weekLabel: "WEEK 8 • MOBILITY UPGRADE",
+        statHeadline: "Pain-free overhead range",
+        statSubtext: "8 Weeks Reset",
+        desc: "Restoring overhead movement quality and smooth press patterns through mobility-focused training.",
+        videoId: "j71XgK-9Kco"
       }
     ]
   },
@@ -3545,25 +3769,24 @@ export function parseContentTxt(text: string): WebsiteContent {
 
   for (const i of clientIndices) {
     const nameKey = `client_${i}_name`;
-    const skillKey = `client_${i}_skill`;
-    const durationKey = `client_${i}_duration`;
+    const badgeKey = `client_${i}_badge`;
+    const videoIdKey = `client_${i}_video_id`;
+    const durationKey = `client_${i}_video_duration`;
+    const weekLabelKey = `client_${i}_week_label`;
+    const statHeadlineKey = `client_${i}_stat_headline`;
+    const statSubtextKey = `client_${i}_stat_subtext`;
     const descKey = `client_${i}_desc`;
-    const videosKey = `client_${i}_videos`;
-    
-    if (videoTestimonialsSource[nameKey]) {
-      const videosRaw = videoTestimonialsSource[videosKey] || '';
-      const videos = videosRaw
-        .split(',')
-        .map((v: string) => v.trim())
-        .filter((v: string) => v.length > 0);
 
+    if (videoTestimonialsSource[nameKey]) {
       videoTestimonialItems.push({
         athlete: videoTestimonialsSource[nameKey],
-        skill: videoTestimonialsSource[skillKey] || '',
-        duration: videoTestimonialsSource[durationKey] || '',
+        badge: videoTestimonialsSource[badgeKey] || '',
+        videoDuration: videoTestimonialsSource[durationKey] || '',
+        weekLabel: videoTestimonialsSource[weekLabelKey] || '',
+        statHeadline: videoTestimonialsSource[statHeadlineKey] || '',
+        statSubtext: videoTestimonialsSource[statSubtextKey] || '',
         desc: videoTestimonialsSource[descKey] || '',
-        id: videos[0] || '78zo1AeWSc8',
-        videos: videos.length > 0 ? videos : ['78zo1AeWSc8'],
+        videoId: videoTestimonialsSource[videoIdKey] || '78zo1AeWSc8',
       });
     }
   }

@@ -52,32 +52,33 @@ youtube_id = 78zo1AeWSc8
 video_title = Calisthenics Masterclass & Progression Secrets
 
 [REVIEWS]
-review_1 = "This program is incredible! I went from struggling with basic pushups to mastering the handstand pushup. The mobile layout makes it so easy to follow in the park." - Marcus T.
-review_2 = "Surya's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control." - Sarah K.
-review_3 = "Absolutely mind-blowing results. I've gained 5kg of solid muscle and feel stronger and lighter than ever. The support is elite." - Alex R.
-review_4 = "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Surya right there on the bars with me." - Liam P.
-review_5 = "Most fitness programs are boring. Calisthenics builds skill, coordination, and a highly aesthetic physique. Best coaching out there." - Elena G.
+review_1 = "Able to gain some shape in shoulder and chest, I realized an increase in hand power and can do 1 to 2 pullups now; before starting I could not do even one. I also saw strength gains in my thighs, though my core still needs work. Overall, visible improvement in some parts; I need to stay consistent 5 days a week to see more positives." - Basker (42yr old)
+review_2 = "It's been 3 months of a great journey into the calisthenics world with you. I was skeptical about online coaching at first, but now I feel very happy with the decision. You analyzed my workouts and tailored every exercise, making me comfortable and confident. Thank you for pushing my limits and helping me unlock new skills." - Sidharth (32yr old)
+review_3 = "These two months with coach Surya have been amazing. My endurance, flexibility, and strength improved a lot, and I learned the correct form for every exercise plus calisthenics basics like frog pose. This journey is already amazing and there is a long way to go." - Yasin (30yr old)
+review_4 = "Intha two months ennaku nalla challenge ah irunthuchi. Everyday pain feel panna atha enjoy panna, every midnight ennoda kai semma pain tharum but I will not stop. Naa strong ah irukken nu feel pandren. I can feel my body shape changing and my blood sugar is under control. Totally I feel so happy." - Pooja (19yr old)
+review_5 = "Overall, nice experience for the first 3 months bro. I saw better changes than a year at gym without taking protein supplements. Weekly workout variation made it more interesting and motivating. Calisthenics became a stress buster while I handle study pressure, and I am renewing for another 3 months." - Kumar (28yr old)
+review_6 = "After just 12 classes, I cannot thank Surya enough for the incredible change I’ve experienced. I was unsure of my strength and flexibility at first, but his expertise, patience, and motivation changed my perspective on fitness. Moves that once seemed impossible, like pull-ups, now feel within reach." - Anonymous (35yr old)
 
 [PROGRAM]
-section_title = The Bodyweight Athlete Protocol
-section_subtitle = A comprehensive, mobile-first training environment engineered for rapid skill acquisition and raw strength.
+section_title = Inside the Coaching Experience
+section_subtitle = Everything you need to build strength, master advanced calisthenics skills, and stay consistent—all in one personalized coaching system designed around your goals.
 supporting_image = https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop
 
 point_1_icon = Target
-point_1_title = Skill-Based Progressions
-point_1_text = Master high-level skills like the Handstand, Muscle-Up, and Planche with personalized, joint-safe progressive stages.
+point_1_title = PERSONALIZED SKILL PROGRESSIONS
+point_1_text = Master pull-ups, muscle-ups, handstands, front lever, and planche through structured progressions tailored to your level.
 
 point_2_icon = Flame
-point_2_title = Hypertrophy & Fat Loss
-point_2_text = Build a dense, functional, and highly defined athletic physique using targeted bodyweight resistance protocols.
+point_2_title = STRENGTH & PHYSIQUE DEVELOPMENT
+point_2_text = Build lean muscle, increase [obscured] strength, and develop [obscured] athletic physique with progressive bodyweight training.
 
 point_3_icon = Shield
-point_3_title = Joint Bulletproofing
-point_3_text = Strengthen your wrists, elbows, and shoulders with expert mobility and active flexibility routines to prevent injury.
+point_3_title = MOBILITY & INJURY PREVENTION
+point_3_text = Improve flexibility, joint health, and movement quality with mobility routines that help you train consistently and reduce injury risk.
 
 point_4_icon = Zap
-point_4_title = Mobile Training Hub
-point_4_text = Access your daily workouts, HD demonstration videos, and submit direct video form checks, optimized for the outdoor park.
+point_4_title = YOUR COACHING DASHBOARD
+point_4_text = Access workouts, demonstration videos, progress tracking, form reviews, and direct coach support—[obscured]
 
 [FOOTER]
 instagram_url = https://instagram.com/calisthenicscoach
@@ -90,32 +91,43 @@ youtube_cta_text = Subscribe on YouTube
 
 [VIDEO_TESTIMONIALS]
 section_eyebrow = Clients Progress Library
-section_title = Progress in 
+section_title = Progress in Motion
 section_subtitle = Drag or swipe the video horizontally to slide through progress clips.
-; Remove every client_* entry below to hide the section entirely.
 client_1_name = Marcus T.
-client_1_skill = Front Lever & Muscle-Up Mastery
-client_1_duration = 12 Weeks Protocol
-client_1_desc = Demonstrating solid 10-second front levers and explosive bar muscle-ups with perfect mechanics.
-client_1_videos = 78zo1AeWSc8, tpEe10R1f0Y, p9gYwJ8I9uY
+client_1_badge = MUSCLE-UP
+client_1_video_id = 78zo1AeWSc8
+client_1_video_duration = 2:14
+client_1_week_label = WEEK 12 • MUSCLE-UP PROGRESS
+client_1_stat_headline = From 0 to 3 Strict Muscle-Ups
+client_1_stat_subtext = 12 Weeks Transformation
+client_1_desc = Demonstrating solid front lever control and explosive muscle-up strength after consistent progressions.
 
 client_2_name = Sarah K.
-client_2_skill = Freestanding Handstand Balance
-client_2_duration = 16 Weeks Protocol
-client_2_desc = Showcasing pristine shoulder stability and body alignment during an active freestanding hold.
-client_2_videos = p9gYwJ8I9uY, EGMG_7m_xH4
+client_2_badge = HANDSTAND
+client_2_video_id = p9gYwJ8I9uY
+client_2_video_duration = 1:58
+client_2_week_label = WEEK 16 • HANDSTAND BREAKTHROUGH
+client_2_stat_headline = Built shoulder stability and balance
+client_2_stat_subtext = 16 Weeks Progress
+client_2_desc = Achieving clean freestanding holds and tight body alignment through targeted shoulder work.
 
 client_3_name = Alex R.
-client_3_skill = Gymnastic Ring False-Grip Flow
-client_3_duration = 24 Weeks Protocol
-client_3_desc = Seamless flow through ring muscle-ups, clean static support holds, and stable shoulder stands.
-client_3_videos = EGMG_7m_xH4, j71XgK-9Kco
+client_3_badge = STRENGTH
+client_3_video_id = EGMG_7m_xH4
+client_3_video_duration = 2:05
+client_3_week_label = WEEK 24 • STRENGTH EVOLUTION
+client_3_stat_headline = Clean gymnastic ring transitions
+client_3_stat_subtext = 24 Weeks Mastery
+client_3_desc = Executing fluid ring muscle-up flows and stable support holds after systematic strength buildup.
 
 client_4_name = David L.
-client_4_skill = Overhead Mobility Restoration
-client_4_duration = 8 Weeks Protocol
-client_4_desc = Showing pain-free overhead extensions and fluid press movements after resolving severe impingement.
-client_4_videos = j71XgK-9Kco, 78zo1AeWSc8
+client_4_badge = MOBILITY
+client_4_video_id = j71XgK-9Kco
+client_4_video_duration = 1:52
+client_4_week_label = WEEK 8 • MOBILITY UPGRADE
+client_4_stat_headline = Pain-free overhead range
+client_4_stat_subtext = 8 Weeks Reset
+client_4_desc = Restoring overhead movement quality and smooth press patterns through mobility-focused training.
 
 [FAQ]
 section_eyebrow = Common Questions

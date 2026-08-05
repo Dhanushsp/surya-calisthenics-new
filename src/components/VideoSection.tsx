@@ -19,7 +19,8 @@ export default function VideoSection({ content }: VideoSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // The user's *intent*: do they want sound on, if the video is visible?
-  const [wantsSound, setWantsSound] = useState(false);
+  // Default to true so the video unmuted when the section scrolls into view.
+  const [wantsSound, setWantsSound] = useState(true);
   // Whether the video player is actually visible in the viewport right now.
   const [isInView, setIsInView] = useState(false);
 

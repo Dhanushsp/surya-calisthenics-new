@@ -70,50 +70,54 @@ export const DEFAULT_CONTENT: WebsiteContent = {
   },
   reviews: [
     {
-      text: "This program is incredible! I went from struggling with basic pushups to mastering the handstand pushup. The mobile layout makes it so easy to follow in the park.",
-      author: "Marcus T."
+      text: "Able to gain some shape in shoulder and chest, I realized an increase in hand power and can do 1 to 2 pullups now; before starting I could not do even one. I also saw strength gains in my thighs, though my core still needs work. Overall, visible improvement in some parts; I need to stay consistent 5 days a week to see more positives.",
+      author: "Basker (42yr old)"
     },
     {
-      text: "Surya's step-by-step progressions solved my shoulder pain and unlocked my first ever muscle-up! Truly life-changing body control.",
-      author: "Sarah K."
+      text: "It's been 3 months of a great journey into the calisthenics world with you. I was skeptical about online coaching at first, but now I feel very happy with the decision. You analyzed my workouts and tailored every exercise, making me comfortable and confident. Thank you for pushing my limits and helping me unlock new skills.",
+      author: "Sidharth (32yr old)"
     },
     {
-      text: "Absolutely mind-blowing results. I've gained 5kg of solid muscle and feel stronger and lighter than ever. The support is elite.",
-      author: "Alex R."
+      text: "These two months with coach Surya have been amazing. My endurance, flexibility, and strength improved a lot, and I learned the correct form for every exercise plus calisthenics basics like frog pose. This journey is already amazing and there is a long way to go.",
+      author: "Yasin (30yr old)"
     },
     {
-      text: "Excellent coaching. The weekly video form checks are highly detailed. It feels like having Surya right there on the bars with me.",
-      author: "Liam P."
+      text: "Intha two months ennaku nalla challenge ah irunthuchi. Everyday pain feel panna atha enjoy panna, every midnight ennoda kai semma pain tharum but I will not stop. Naa strong ah irukken nu feel pandren. I can feel my body shape changing and my blood sugar is under control. Totally I feel so happy.",
+      author: "Pooja (19yr old)"
     },
     {
-      text: "Most fitness programs are boring. Calisthenics builds skill, coordination, and a highly aesthetic physique. Best coaching out there.",
-      author: "Elena G."
+      text: "Overall, nice experience for the first 3 months bro. I saw better changes than a year at gym without taking protein supplements. Weekly workout variation made it more interesting and motivating. Calisthenics became a stress buster while I handle study pressure, and I am renewing for another 3 months.",
+      author: "Kumar (28yr old)"
+    },
+    {
+      text: "After just 12 classes, I cannot thank Surya enough for the incredible change I’ve experienced. I was unsure of my strength and flexibility at first, but his expertise, patience, and motivation changed my perspective on fitness. Moves that once seemed impossible, like pull-ups, now feel within reach.",
+      author: "Anonymous (35yr old)"
     }
   ],
   program: {
-    section_title: "The Bodyweight Athlete Protocol",
-    section_subtitle: "A comprehensive, mobile-first training environment engineered for rapid skill acquisition and raw strength.",
+    section_title: "Inside the Coaching Experience",
+    section_subtitle: "Everything you need to build strength, master advanced calisthenics skills, and stay consistent—all in one personalized coaching system designed around your goals.",
     supporting_image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop",
     points: [
       {
         icon: "Target",
-        title: "Skill-Based Progressions",
-        text: "Master high-level skills like the Handstand, Muscle-Up, and Planche with personalized, joint-safe progressive stages."
+        title: "PERSONALIZED SKILL PROGRESSIONS",
+        text: "Master pull-ups, muscle-ups, handstands, front lever, and planche through structured progressions tailored to your level."
       },
       {
         icon: "Flame",
-        title: "Hypertrophy & Fat Loss",
-        text: "Build a dense, functional, and highly defined athletic physique using targeted bodyweight resistance protocols."
+        title: "STRENGTH & PHYSIQUE DEVELOPMENT",
+        text: "Build lean muscle, increase [obscured] strength, and develop [obscured] athletic physique with progressive bodyweight training."
       },
       {
         icon: "Shield",
-        title: "Joint Bulletproofing",
-        text: "Strengthen your wrists, elbows, and shoulders with expert mobility and active flexibility routines to prevent injury."
+        title: "MOBILITY & INJURY PREVENTION",
+        text: "Improve flexibility, joint health, and movement quality with mobility routines that help you train consistently and reduce injury risk."
       },
       {
         icon: "Zap",
-        title: "Mobile Training Hub",
-        text: "Access your daily workouts, HD demonstration videos, and submit direct video form checks, optimized for the outdoor park."
+        title: "YOUR COACHING DASHBOARD",
+        text: "Access workouts, demonstration videos, progress tracking, form reviews, and direct coach support—[obscured]"
       }
     ]
   },
@@ -127,41 +131,49 @@ export const DEFAULT_CONTENT: WebsiteContent = {
     youtube_cta_text: "Subscribe on YouTube"
   },
   videoTestimonials: {
-    section_eyebrow: "Proofs & Progress",
-    section_title: "Athletes on the Bars",
+    section_eyebrow: "Clients Progress Library",
+    section_title: "Progress in Motion",
     section_subtitle: "Drag or swipe the video horizontally to slide through progress clips.",
     items: [
       {
         athlete: "Marcus T.",
-        skill: "Front Lever & Muscle-Up Mastery",
-        duration: "12 Weeks Protocol",
-        desc: "Demonstrating solid 10-second front levers and explosive bar muscle-ups with perfect mechanics.",
-        id: "78zo1AeWSc8",
-        videos: ["78zo1AeWSc8", "tpEe10R1f0Y", "p9gYwJ8I9uY"]
+        badge: "MUSCLE-UP",
+        videoDuration: "2:14",
+        weekLabel: "WEEK 12 • MUSCLE-UP PROGRESS",
+        statHeadline: "From 0 to 3 Strict Muscle-Ups",
+        statSubtext: "12 Weeks Transformation",
+        desc: "Demonstrating solid front lever control and explosive muscle-up strength after consistent progressions.",
+        videoId: "78zo1AeWSc8"
       },
       {
         athlete: "Sarah K.",
-        skill: "Freestanding Handstand Balance",
-        duration: "16 Weeks Protocol",
-        desc: "Showcasing pristine shoulder stability and body alignment during an active freestanding hold.",
-        id: "p9gYwJ8I9uY",
-        videos: ["p9gYwJ8I9uY", "EGMG_7m_xH4"]
+        badge: "HANDSTAND",
+        videoDuration: "1:58",
+        weekLabel: "WEEK 16 • HANDSTAND BREAKTHROUGH",
+        statHeadline: "Built shoulder stability and balance",
+        statSubtext: "16 Weeks Progress",
+        desc: "Achieving clean freestanding holds and tight body alignment through targeted shoulder work.",
+        videoId: "p9gYwJ8I9uY"
       },
       {
         athlete: "Alex R.",
-        skill: "Gymnastic Ring False-Grip Flow",
-        duration: "24 Weeks Protocol",
-        desc: "Seamless flow through ring muscle-ups, clean static support holds, and stable shoulder stands.",
-        id: "EGMG_7m_xH4",
-        videos: ["EGMG_7m_xH4", "j71XgK-9Kco"]
+        badge: "STRENGTH",
+        videoDuration: "2:05",
+        weekLabel: "WEEK 24 • STRENGTH EVOLUTION",
+        statHeadline: "Clean gymnastic ring transitions",
+        statSubtext: "24 Weeks Mastery",
+        desc: "Executing fluid ring muscle-up flows and stable support holds after systematic strength buildup.",
+        videoId: "EGMG_7m_xH4"
       },
       {
         athlete: "David L.",
-        skill: "Overhead Mobility Restoration",
-        duration: "8 Weeks Protocol",
-        desc: "Showing pain-free overhead extensions and fluid press movements after resolving severe impingement.",
-        id: "j71XgK-9Kco",
-        videos: ["j71XgK-9Kco", "78zo1AeWSc8"]
+        badge: "MOBILITY",
+        videoDuration: "1:52",
+        weekLabel: "WEEK 8 • MOBILITY UPGRADE",
+        statHeadline: "Pain-free overhead range",
+        statSubtext: "8 Weeks Reset",
+        desc: "Restoring overhead movement quality and smooth press patterns through mobility-focused training.",
+        videoId: "j71XgK-9Kco"
       }
     ]
   },
@@ -368,25 +380,24 @@ export function parseContentTxt(text: string): WebsiteContent {
 
   for (const i of clientIndices) {
     const nameKey = `client_${i}_name`;
-    const skillKey = `client_${i}_skill`;
-    const durationKey = `client_${i}_duration`;
+    const badgeKey = `client_${i}_badge`;
+    const videoIdKey = `client_${i}_video_id`;
+    const durationKey = `client_${i}_video_duration`;
+    const weekLabelKey = `client_${i}_week_label`;
+    const statHeadlineKey = `client_${i}_stat_headline`;
+    const statSubtextKey = `client_${i}_stat_subtext`;
     const descKey = `client_${i}_desc`;
-    const videosKey = `client_${i}_videos`;
-    
-    if (videoTestimonialsSource[nameKey]) {
-      const videosRaw = videoTestimonialsSource[videosKey] || '';
-      const videos = videosRaw
-        .split(',')
-        .map((v: string) => v.trim())
-        .filter((v: string) => v.length > 0);
 
+    if (videoTestimonialsSource[nameKey]) {
       videoTestimonialItems.push({
         athlete: videoTestimonialsSource[nameKey],
-        skill: videoTestimonialsSource[skillKey] || '',
-        duration: videoTestimonialsSource[durationKey] || '',
+        badge: videoTestimonialsSource[badgeKey] || '',
+        videoDuration: videoTestimonialsSource[durationKey] || '',
+        weekLabel: videoTestimonialsSource[weekLabelKey] || '',
+        statHeadline: videoTestimonialsSource[statHeadlineKey] || '',
+        statSubtext: videoTestimonialsSource[statSubtextKey] || '',
         desc: videoTestimonialsSource[descKey] || '',
-        id: videos[0] || '78zo1AeWSc8',
-        videos: videos.length > 0 ? videos : ['78zo1AeWSc8'],
+        videoId: videoTestimonialsSource[videoIdKey] || '78zo1AeWSc8',
       });
     }
   }

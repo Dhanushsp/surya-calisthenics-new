@@ -24,10 +24,10 @@ export default function Reviews({ items }: ReviewsProps) {
           ATHLETE TESTIMONIALS
         </span>
         <h2 className="text-4xl md:text-6xl font-serif italic font-normal tracking-tight text-brand-text">
-          What the Community Says
+          What My Athletes Say
         </h2>
         <p className="text-brand-muted text-sm max-w-lg mx-auto mt-4 font-sans font-light">
-          Real feedback from dedicated individuals who have mastered their own bodyweight through our training environment.
+          Every review reflects a journey of consistency, discipline, and progress. Hear directly from athletes who transformed their strength, confidence, and performance through personalized coaching.
         </p>
       </div>
 
@@ -66,11 +66,9 @@ export default function Reviews({ items }: ReviewsProps) {
                   {review.author.slice(0, 2).toUpperCase()}
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-brand-text font-sans flex items-center gap-1.5">
-                    <span>{review.author}</span>
-                    <ShieldCheck className="h-3.5 w-3.5 text-brand-primary/60 fill-brand-primary/10 shrink-0" />
+                  <h4 className="text-xs font-bold text-brand-text font-sans">
+                    {review.author}
                   </h4>
-                  <span className="text-[9px] text-brand-muted font-mono uppercase tracking-widest font-bold">Verified Athlete</span>
                 </div>
               </div>
             </div>

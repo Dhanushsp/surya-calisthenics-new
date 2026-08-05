@@ -38,7 +38,7 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
         {/* Section Title */}
         <div className="max-w-3xl mb-16">
           <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-brand-primary uppercase block mb-3">
-            PROGRAM ARCHITECTURE
+            PROGRAM EXPERIENCE
           </span>
           <h2 className="text-4xl md:text-6xl font-serif italic font-normal tracking-tight text-brand-text mb-4 leading-tight">
             {content.section_title}
@@ -64,14 +64,14 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
               <div className="absolute inset-0 bg-gradient-to-t from-brand-card/90 via-transparent to-transparent" />
               
               {/* Overlaid stats box */}
-              <div className="absolute bottom-6 left-6 right-6 bg-brand-card border border-brand-border p-5 rounded-none backdrop-blur-md">
+              {/* <div className="absolute bottom-6 left-6 right-6 bg-brand-card border border-brand-border p-5 rounded-none backdrop-blur-md">
                 <h4 className="text-xs font-mono font-bold text-brand-primary mb-2 tracking-[0.1em] uppercase">
                   ⚡ All-Inclusive Mobile Access
                 </h4>
                 <p className="text-xs text-brand-muted leading-relaxed font-light">
                   Includes full HD video exercise catalogs, active form-check queues, customized progress trackers, and real-time messaging directly with Coach Surya.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -107,7 +107,7 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
             </div>
 
             {/* Direct CTA under features */}
-            <div className="p-6 md:p-8 bg-brand-card rounded-none border border-brand-border mt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            {/* <div className="p-6 md:p-8 bg-brand-card rounded-none border border-brand-border mt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div>
                 <h4 className="text-lg font-serif italic font-normal text-brand-text tracking-tight mb-1">
                   Ready to test your limits?
@@ -122,7 +122,7 @@ export default function ProgramDetails({ content, onCtaClick }: ProgramDetailsPr
               >
                 Apply for Cohort
               </button>
-            </div>
+            </div> */}
           </div>
 
         </div>
