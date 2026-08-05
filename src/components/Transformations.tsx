@@ -222,11 +222,7 @@ export default function Transformations({ items: itemsProp, onCtaClick }: Transf
       {/* Swipeable & Scroll-Synced Track (transform-driven, infinite loop) */}
       <div className="relative w-full overflow-hidden">
 
-        {/* Soft edge blur fading on left/right borders */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-brand-bg via-brand-bg/40 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-brand-bg via-brand-bg/40 to-transparent z-10 pointer-events-none" />
-
-        {/* Draggable viewport — overflow hidden, no native scrollbar/scroll-snap needed */}
+          {/* Draggable viewport — overflow hidden, no native scrollbar/scroll-snap needed */}
         <div
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -284,7 +280,6 @@ export default function Transformations({ items: itemsProp, onCtaClick }: Transf
                           : 'filter brightness-[0.95] contrast-[1.1]'
                       }`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none" />
                   </div>
 
                   {/* Card Description */}
